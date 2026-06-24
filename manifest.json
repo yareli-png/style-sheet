@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.3.1",
+  "metadata": {
+    "appmode": "static",
+    "primary_rmd": null,
+    "primary_html": "index.html",
+    "content_category": "",
+    "has_parameters": false
+  },
+  "packages": null,
+  "files": {
+    "index.html": {
+      "checksum": "7f7af83ed5d54343bcf707c8533caaf8"
+    },
+    "assets/km-logo.svg": {
+      "checksum": "0217329688a673585b44be90d99d6aa2"
+    },
+    "assets/banner-still-growing.svg": {
+      "checksum": "c17ffacf9930ccf23efb0d1124660f61"
+    },
+    "assets/step-choose-setup.svg": {
+      "checksum": "6eee7de088d23eba0b35dc24292a9da6"
+    },
+    "assets/step-browse-pick.svg": {
+      "checksum": "763ae4eedb7b656405a0a2784ede3bd5"
+    },
+    "assets/step-grab-copy.svg": {
+      "checksum": "8a7a3881ce9747f22d33835f2cad5d25"
+    },
+    "assets/step-take-with-you.svg": {
+      "checksum": "4e22fed10abf028c3d961c550ccabda2"
+    },
+    "assets/icon-support.svg": {
+      "checksum": "09ef8f8fce6c364337caeebb96818bd0"
+    },
+    "assets/icon-feedback.svg": {
+      "checksum": "27a590363eef0e92ecd1d26aced0907b"
+    },
+    "assets/icon-colors-typography.svg": {
+      "checksum": "318a5eb649cdb7470500a25d622ae27d"
+    },
+    "assets/icon-getting-started.svg": {
+      "checksum": "1be77478784793bf6090a07a7374d47c"
+    },
+    "assets/icon-schemes-modes.svg": {
+      "checksum": "f3c3d017a0b9f5dfe31288fb49c0e8e0"
+    },
+    "assets/icon-using-tool.svg": {
+      "checksum": "5206e7840bf541247e57c0f33ccaac9d"
+    },
+    "assets/icon-feedback-modal.svg": {
+      "checksum": "a47d7680feb432fd71b6acd411c6544a"
+    }
+  },
+  "users": null
+}
