@@ -1,0 +1,3207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--scheme-primary); outline-offset: 2px; border-radius: 4px; }
+
+:root {
+  --bg: #141414;
+  --surface: #0A0A0A;
+  --card-bg: #000000;
+  --card-border: #2A2A2A;
+  --card-border-hover: #555555;
+  --card-border-pinned: #FFFFFF;
+  --text-primary: #FFFFFF;
+  --text-secondary: #999999;
+  --text-muted: #767676;
+  --section-border: #1E1E1E;
+  --pill-bg: #1A1A1A;
+  --pill-active-bg: #2A2A2A;
+  --pill-border: #333333;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --transition: 200ms ease;
+  --scheme-primary: #E50914;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 400ms ease, color 400ms ease;
+  padding-bottom: 96px;
+}
+
+body *,
+body *::before,
+body *::after {
+  transition: background-color 400ms ease, border-color 400ms ease, color 400ms ease, box-shadow 400ms ease;
+}
+
+body.light-mode {
+  --bg: #F5F5F5;
+  --surface: #EBEBEB;
+  --card-bg: #FFFFFF;
+  --card-border: #DCDCDC;
+  --card-border-hover: #AAAAAA;
+  --card-border-pinned: #000000;
+  --text-primary: #000000;
+  --text-secondary: #555555;
+  --text-muted: #767676;
+  --section-border: #E0E0E0;
+  --pill-bg: #EBEBEB;
+  --pill-active-bg: #DCDCDC;
+  --pill-border: #D0D0D0;
+}
+
+/* ── NAV ──────────────────────────────────────────────────────────────── */
+nav {
+  background: #000000;
+  border-bottom: 1px solid #111111;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.nav-logo {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: opacity 0.15s;
+}
+.nav-logo:hover { opacity: 0.75; }
+
+.nav-logo img,
+.nav-logo svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-logo-placeholder {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #222222;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-tab {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #666666;
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color var(--transition), background var(--transition);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.nav-tab:hover { color: #CCCCCC; }
+.nav-tab.active { color: #FFFFFF; background: #1C1C1E; font-weight: 700; }
+
+/* ── MAIN ─────────────────────────────────────────────────────────────── */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 32px;
+}
+
+/* ── SECTION HEADER ───────────────────────────────────────────────────── */
+.section-header {
+  margin-bottom: 36px;
+}
+
+.section-label {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: var(--font-sans);
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 14px;
+  letter-spacing: -0.025em;
+}
+
+.section-subtitle {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: normal;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* ── CONTROLS ─────────────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  margin-bottom: 48px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: opacity var(--transition);
+}
+
+.control-group.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.controls.hidden,
+.section-header.hidden {
+  display: none;
+}
+
+/* ── FEEDBACK ────────────────────────────────────────────────────────────── */
+/* ── FEEDBACK FAB ─────────────────────────────────────────────────────── */
+/* surface-product-brand: #E50914 */
+.review-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  background: linear-gradient(135deg, #4061E7, #6D3BE3);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 100px;
+  height: 44px;
+  width: 44px;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(64,97,231,0.30);
+  transition: bottom 0.3s ease, width 0.25s ease, gap 0.25s ease, padding 0.25s ease, background 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.review-fab .review-fab-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 0.25s ease, opacity 0.2s ease;
+}
+.review-fab:hover {
+  background: linear-gradient(135deg, #3451C5, #5C32BF);
+  width: auto;
+  padding: 0 16px;
+  gap: 8px;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(64,97,231,0.35);
+}
+.review-fab:hover .review-fab-label {
+  max-width: 120px;
+  opacity: 1;
+}
+#pin-bar.visible ~ .review-fab { bottom: 92px; }
+
+/* ── FEEDBACK MODAL ───────────────────────────────────────────────────── */
+/* surface-overlay: rgba(0,0,0,0.70) */
+.feedback-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  background: rgba(0,0,0,0.70);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.feedback-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* modal--surface-fullscreen-overlay light: #FAFAFA | _panel--shadow-1: rgba(0,0,0,0.10) */
+.feedback-modal {
+  background: #FAFAFA;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.16);
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  opacity: 0;
+}
+.feedback-overlay.open .feedback-modal {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+/* foreground light: rgba(0,0,0,0.90) */
+.feedback-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.90);
+}
+.feedback-modal-header img { flex-shrink: 0; }
+/* foreground-dim light: rgba(0,0,0,0.50) */
+.feedback-modal-sub {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: rgba(0,0,0,0.50);
+  margin: -4px 0 0;
+  line-height: 1.5;
+}
+/* input--surface light: #FFFFFF | border-dim light: rgba(128,128,128,0.30) */
+.feedback-input,
+.feedback-textarea {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.14);
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: rgba(0,0,0,0.90);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+/* border-focus: #4061E7 */
+.feedback-input:focus,
+.feedback-textarea:focus { border-color: #4061E7; box-shadow: 0 0 0 2px rgba(64,97,231,0.15); }
+/* foreground-dim light: rgba(0,0,0,0.35) */
+.feedback-input::placeholder,
+.feedback-textarea::placeholder { color: rgba(0,0,0,0.35); }
+.feedback-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+.feedback-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 2px;
+}
+/* Ghost button — border only */
+.feedback-refresh-btn {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.16);
+  border-radius: 4px;
+  height: 36px;
+  padding: 0 16px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.55);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.feedback-refresh-btn:hover { border-color: rgba(0,0,0,0.30); color: rgba(0,0,0,0.90); }
+/* Primary button — button--surface-primary: #4061E7 */
+.feedback-submit-btn {
+  background: #4061E7;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  height: 36px;
+  padding: 0 20px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.feedback-submit-btn:hover { background: #3451C5; }
+
+.control-label {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.pill-toggle {
+  display: flex;
+  background: #1C1C1E;
+  border: none;
+  border-radius: 100px;
+  padding: 5px;
+  gap: 2px;
+}
+
+body.light-mode .pill-toggle {
+  background: #E0E0E0;
+}
+
+.pill-btn {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: none;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: opacity var(--transition), background var(--transition);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+body.light-mode .pill-btn { color: #555555; }
+
+.pill-btn:hover { opacity: 0.75; }
+
+.pill-btn.active {
+  background: #FFFFFF;
+  color: #000000;
+  opacity: 1;
+}
+
+body.light-mode .pill-btn.active {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.scheme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: none;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: opacity var(--transition), background var(--transition);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+body.light-mode .scheme-btn { color: #555555; }
+
+.scheme-btn:hover { opacity: 0.75; }
+
+.scheme-btn.active {
+  background: #FFFFFF;
+  color: #000000;
+  opacity: 1;
+}
+
+body.light-mode .scheme-btn.active {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.scheme-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── TAB CONTENT ──────────────────────────────────────────────────────── */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── ACCORDION ────────────────────────────────────────────────────────── */
+.accordion {
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--section-border);
+  transition: border-color 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion:first-child { border-top: 1px solid var(--section-border); transition: border-color 700ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+.accordion-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 24px 0;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity var(--transition);
+}
+
+.accordion-header:hover { opacity: 0.8; }
+
+.accordion-title {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.accordion-chevron {
+  color: var(--text-muted);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.accordion.open .accordion-chevron { transform: rotate(180deg); }
+
+.accordion-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 320ms ease;
+}
+
+.accordion.open .accordion-body { max-height: 1200px; }
+
+
+.accordion-inner {
+  padding: 0 0 28px;
+}
+
+.accordion-desc-block {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: normal;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  max-width: 680px;
+}
+
+/* ── SWATCH GRID ──────────────────────────────────────────────────────── */
+.swatches-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+/* ── SWATCH CARD ──────────────────────────────────────────────────────── */
+.swatch-card {
+  border: 1.5px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  position: relative;
+}
+
+.swatch-card:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+body.light-mode .swatch-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.swatch-card.pinned {
+  border-color: var(--card-border-pinned);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 6px 20px rgba(0,0,0,0.4);
+}
+
+body.light-mode .swatch-card.pinned {
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.12), 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.swatch-color {
+  height: 130px;
+  position: relative;
+  transition: background-color 180ms ease;
+}
+
+/* Copy-on-hover icon button */
+.swatch-copy-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.swatch-card:hover .swatch-copy-icon,
+.gradient-strip-wrap:hover .swatch-copy-icon {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.swatch-copy-icon:hover {
+  background: rgba(0,0,0,0.8);
+  transform: scale(1.08);
+}
+
+.swatch-copy-icon.flashed {
+  opacity: 1 !important;
+  background: rgba(80,200,80,0.7);
+}
+
+.swatch-info {
+  padding: 10px 11px 11px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--card-border);
+}
+body.light-mode .swatch-info {
+  background: #F2F2F2;
+  border-top-color: #E8E8E8;
+}
+
+.swatch-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.swatch-hex {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 3px;
+  letter-spacing: 0.02em;
+}
+
+.swatch-role {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── GRADIENT CARDS ───────────────────────────────────────────────────── */
+.gradient-card {
+  border: 1.5px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.gradient-card:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+body.light-mode .gradient-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.gradient-card.pinned {
+  border-color: var(--card-border-pinned);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
+}
+
+.gradient-strip-wrap {
+  position: relative;
+}
+
+.gradient-strip {
+  height: 88px;
+  transition: background 180ms ease;
+}
+
+.gradient-card .swatch-copy-icon {
+  top: 8px;
+  right: 8px;
+}
+
+.gradient-info {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--card-border);
+}
+body.light-mode .gradient-info {
+  background: #F2F2F2;
+  border-top-color: #E8E8E8;
+}
+
+.gradient-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.gradient-css-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gradient-role {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ── PLACEHOLDER ──────────────────────────────────────────────────────── */
+.placeholder {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  border: 1px dashed var(--section-border);
+  border-radius: 12px;
+}
+
+/* ── TYPOGRAPHY ───────────────────────────────────────────────────────── */
+
+/* Typography cards are always light — fixed reference spec, not themed */
+
+.type-accordion {
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--section-border);
+  transition: border-color 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.type-accordion:first-child { border-top: 1px solid var(--section-border); transition: border-color 700ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+.type-accordion .accordion-body {
+  max-height: 0;
+}
+
+.type-accordion.open .accordion-body {
+  max-height: 4000px;
+}
+
+.type-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 0 28px;
+}
+
+.type-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  overflow: hidden;
+}
+.type-card:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+body.light-mode .type-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.type-card.pinned {
+  border-color: var(--card-border-pinned);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 6px 20px rgba(0,0,0,0.4);
+}
+body.light-mode .type-card.pinned {
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.12), 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.type-sample-area {
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  overflow: hidden;
+}
+
+.type-sample-text {
+  font-family: var(--font-sans);
+  color: #E5E5E5;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.type-meta {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 12px 36px 16px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--card-border);
+  flex-wrap: nowrap;
+}
+body.light-mode .type-meta {
+  background: #F2F2F2;
+  border-top-color: #E8E8E8;
+}
+
+.type-meta-main {
+  flex: 1;
+  min-width: 140px;
+}
+
+.type-token {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+.type-font-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.type-spec-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.type-spec-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.type-spec-value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.type-usage {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  flex: 1;
+  min-width: 0;
+}
+
+.type-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #FFFFFF;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition);
+  z-index: 2;
+}
+body.light-mode .type-copy-btn {
+  background: rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.12);
+  color: rgba(0,0,0,0.6);
+}
+.type-card:hover .type-copy-btn { opacity: 1; }
+.type-copy-btn:hover { background: rgba(0,0,0,0.8); color: #fff; }
+body.light-mode .type-copy-btn:hover { background: rgba(0,0,0,0.18); color: #000; }
+
+/* ── TOAST ────────────────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #1E1E1E;
+  color: #FFFFFF;
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: normal;
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1px solid #333;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+  white-space: nowrap;
+}
+
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── FADE ─────────────────────────────────────────────────────────────── */
+.fade-target { transition: opacity 130ms ease; }
+.fade-target.fading { opacity: 0; }
+
+/* ── PIN BAR ──────────────────────────────────────────────────────────── */
+#pin-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #232323;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 0 32px;
+  height: 64px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+}
+
+#pin-bar.visible { display: flex; }
+
+.pin-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.pin-count-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--scheme-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.pin-selected-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.90);
+  letter-spacing: -0.01em;
+}
+
+.pin-chevron-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.40);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color var(--transition);
+}
+
+.pin-chevron-btn:hover { color: rgba(255,255,255,0.90); }
+
+.pin-chevron-icon {
+  transition: transform var(--transition);
+}
+
+.pin-panel-open .pin-chevron-icon { transform: rotate(180deg); }
+
+.pin-type-pills {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pin-type-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #2D2D2D;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 20px;
+  padding: 4px 12px 4px 9px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.70);
+  white-space: nowrap;
+}
+
+.pin-type-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pin-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Ghost button */
+.pin-clear-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.60);
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.pin-clear-btn:hover { border-color: rgba(255,255,255,0.32); color: rgba(255,255,255,0.90); }
+
+/* Secondary button — subtle filled */
+.pin-css-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.90);
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.pin-css-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+
+/* Primary button — button--surface-primary: #4061E7 */
+.pin-export-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #4061E7;
+  border: none;
+  color: #FFFFFF;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+
+.pin-export-btn:hover { background: #3451C5; }
+
+/* ── PIN PANEL ────────────────────────────────────────────────────────── */
+#pin-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 199;
+  background: #1C1C1C;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 16px 32px;
+  display: none;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#pin-panel.visible { display: flex; }
+
+.pin-preview-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #2D2D2D;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 6px 10px 6px 8px;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.pin-preview-item:hover {
+  border-color: rgba(229,9,20,0.50);
+  background: #3a2323;
+}
+
+.pin-preview-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.pin-preview-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.70);
+  white-space: nowrap;
+}
+
+.pin-preview-remove {
+  font-size: 14px;
+  color: rgba(255,255,255,0.25);
+  margin-left: 4px;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.pin-preview-item:hover .pin-preview-remove { color: #E50914; }
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+
+  /* Nav */
+  .nav-inner { gap: 16px; padding: 0 16px; }
+  .nav-tab { font-size: 12px; padding: 6px 10px; }
+
+  /* Controls */
+  .controls { flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
+
+  /* Main content */
+  main { padding: 24px 16px; }
+
+  /* Pin bar — wraps to two rows */
+  #pin-bar {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+    padding: 10px 16px;
+    gap: 8px;
+  }
+
+  .pin-bar-left {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pin-selected-label { display: none; }
+
+  .pin-type-pills { flex-wrap: wrap; }
+
+  .pin-type-pill {
+    font-size: 10px;
+    padding: 3px 8px 3px 7px;
+  }
+
+  .pin-bar-actions {
+    flex: 1 1 100%;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .pin-clear-btn,
+  .pin-css-btn,
+  .pin-export-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  /* Pin panel */
+  #pin-panel {
+    padding: 12px 16px;
+    max-height: 140px;
+    bottom: 0;
+  }
+
+  .pin-preview-item { padding: 5px 8px 5px 6px; }
+  .pin-preview-name { font-size: 10px; }
+
+  /* Type cards — hide usage on small screens */
+  .type-usage { display: none; }
+  .type-meta { gap: 16px; flex-wrap: wrap; }
+  .type-sample-area { padding: 0 20px; }
+  .type-meta { padding: 10px 20px 14px; }
+}
+
+@media (max-width: 400px) {
+  .pin-clear-btn { display: none; }
+  .nav-tab { font-size: 11px; padding: 5px 8px; }
+}
+
+/* ── GETTING STARTED / FAQ PAGES ─────────────────────────────────────── */
+.guide-page {
+  max-width: 720px;
+  padding-bottom: 80px;
+}
+
+.guide-section {
+  margin-bottom: 52px;
+}
+
+.guide-eyebrow {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.guide-heading {
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.guide-body {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: normal;
+  color: var(--text-secondary);
+}
+
+.guide-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.guide-steps.cols-3 {
+  flex-direction: row;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.guide-steps.cols-3 .guide-step {
+  flex: 1;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.guide-step-image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.guide-step-image-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.35;
+}
+
+.guide-step-image-inner svg { color: var(--text-primary); }
+
+.guide-step-image-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+}
+
+.guide-steps.cols-3 .guide-step-content {
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.guide-step {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guide-step:hover {
+  border-color: rgba(255,255,255,0.16);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+body.light-mode .guide-step:hover {
+  border-color: rgba(0,0,0,0.14);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.guide-step:hover .guide-step-img {
+  border-color: rgba(229,9,20,0.4);
+  transition: border-color 0.2s ease;
+}
+
+.guide-step-img {
+  flex: 1;
+  min-height: 120px;
+  background: var(--card-bg);
+  border: 1px dashed var(--section-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.guide-step-img-src {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.guide-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 3;
+}
+
+.guide-step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.guide-step-num {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: #E50914;
+  flex-shrink: 0;
+}
+
+.guide-steps.cols-3 .guide-step-num {
+  padding-top: 0;
+  min-width: unset;
+  margin-bottom: 10px;
+}
+
+.guide-step-title {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: normal;
+  color: var(--text-primary);
+}
+
+.guide-step-body {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: normal;
+  color: var(--text-secondary);
+}
+
+.guide-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.guide-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px 5px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--card-border);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.guide-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.guide-inline-tag {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 5px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  vertical-align: baseline;
+  margin: 0 1px;
+}
+
+
+/* Hero */
+.guide-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0 4px;
+}
+
+.guide-placeholder-img {
+  width: 100%;
+  aspect-ratio: 4 / 1;
+  background: var(--card-bg);
+  border: 1px dashed var(--section-border);
+  border-radius: 12px;
+  margin: 32px 0;
+}
+
+.guide-hero-label {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.guide-hero-title {
+  font-family: var(--font-sans);
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.guide-hero-sub {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 24px;
+}
+
+/* Intro */
+.guide-intro-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.guide-intro-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.guide-intro-line {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-secondary);
+}
+
+/* Color sets list */
+.guide-sets-list {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.guide-set-row {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 0;
+}
+
+.guide-set-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.guide-set-name {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.guide-set-desc {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: -6px;
+}
+
+.guide-step-footnote {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* Good to know tips */
+.guide-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 20px;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.guide-tip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--card-border);
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.guide-tip:last-child { border-bottom: none; }
+
+.guide-tip-check {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: #4061E7;
+  transition: transform 0.2s ease;
+}
+
+.guide-tip:hover .guide-tip-check {
+  transform: scale(1.2);
+}
+
+/* Beta note */
+.guide-beta-note {
+  margin-top: 16px;
+  border-radius: 12px;
+  padding: 18px 22px;
+  background: linear-gradient(135deg, #E1E5F5, #A9B9FA);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.guide-beta-note:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(64,97,231,0.15);
+}
+
+body.light-mode .guide-beta-note {
+  background: linear-gradient(135deg, #E1E5F5, #A9B9FA);
+}
+
+.guide-beta-image {
+  flex: 1;
+  align-self: stretch;
+  min-height: 80px;
+  background: rgba(64,97,231,0.12);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.light-mode .guide-beta-image { background: rgba(64,97,231,0.12); }
+
+.guide-beta-text { flex: 3; display: flex; flex-direction: column; gap: 6px; }
+
+.guide-beta-title {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 700;
+  color: #192247;
+}
+
+body.light-mode .guide-beta-title { color: #192247; }
+
+.guide-beta-body {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #233371;
+}
+
+body.light-mode .guide-beta-body { color: #233371; }
+
+/* FAQ */
+.faq-list {
+  margin-top: 20px;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--section-border);
+  transition: border-color 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item:first-child { border-top: 1px solid var(--section-border); transition: border-color 700ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+.faq-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  letter-spacing: normal;
+  color: var(--text-muted);
+  margin-top: 40px;
+  margin-bottom: 4px;
+}
+.faq-category svg, .faq-category img { flex-shrink: 0; }
+
+.faq-category:first-child { margin-top: 20px; }
+
+.faq-category + .faq-item { border-top: 1px solid var(--section-border); }
+
+.faq-q {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.faq-q:hover { color: var(--text-secondary); }
+
+.faq-chevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  transition: transform var(--transition);
+}
+
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-a {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: normal;
+  color: var(--text-secondary);
+  max-width: 620px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding-bottom: 0;
+}
+
+.faq-item.open .faq-a {
+  max-height: 600px;
+  padding-bottom: 22px;
+}
+
+@media (max-width: 640px) {
+  .guide-step { flex-direction: column; gap: 8px; }
+  .guide-steps.cols-3 { flex-direction: column; }
+  .guide-heading { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner" data-review-section="Navigation">
+    <button class="nav-logo" data-tab="colors" aria-label="Go to Colors">
+      <img src="assets/km-logo.svg" alt="Logo" />
+    </button>
+    <div class="nav-tabs">
+      <button class="nav-tab" data-tab="getting-started">Getting Started</button>
+      <button class="nav-tab active" data-tab="colors">Colors</button>
+      <button class="nav-tab" data-tab="gradients">Gradients</button>
+      <button class="nav-tab" data-tab="typography">Typography</button>
+      <button class="nav-tab" data-tab="faq">FAQ</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="section-header" data-review-section="Section Header">
+    <div class="section-label">Style Sheet</div>
+    <h1 class="section-title" id="section-title">Colors</h1>
+    <p class="section-subtitle" id="section-subtitle">All the approved Netflix colors, organized by scheme and background.</p>
+  </div>
+
+  <div class="controls">
+    <div class="control-group" id="mode-control" role="group" aria-label="Color mode">
+      <span class="control-label" id="mode-label">Mode</span>
+      <div class="pill-toggle" role="radiogroup" aria-labelledby="mode-label">
+        <button class="pill-btn active" data-mode="dark" role="radio" aria-checked="true">Dark</button>
+        <button class="pill-btn" data-mode="light" role="radio" aria-checked="false">Light</button>
+      </div>
+    </div>
+    <div class="control-group" id="scheme-control" role="group" aria-label="Color scheme">
+      <span class="control-label" id="scheme-label">Scheme</span>
+      <div class="pill-toggle" role="radiogroup" aria-labelledby="scheme-label">
+        <button class="scheme-btn active" data-scheme="Core" role="radio" aria-checked="true">
+          <span class="scheme-dot" style="background:#E50914" aria-hidden="true"></span> Core
+        </button>
+        <button class="scheme-btn" data-scheme="Cool" role="radio" aria-checked="false">
+          <span class="scheme-dot" style="background:#4061E7" aria-hidden="true"></span> Cool
+        </button>
+        <button class="scheme-btn" data-scheme="Warm" role="radio" aria-checked="false">
+          <span class="scheme-dot" style="background:#DB5B24" aria-hidden="true"></span> Warm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content active fade-target" id="tab-colors" data-review-section="Colors">
+    <div id="colors-accordions"></div>
+  </div>
+
+  <div class="tab-content fade-target" id="tab-gradients" data-review-section="Gradients">
+    <div id="gradients-accordions"></div>
+  </div>
+
+  <div class="tab-content fade-target" id="tab-typography" data-review-section="Typography"></div>
+
+  <div class="tab-content" id="tab-getting-started" data-review-section="Getting Started">
+    <div class="guide-page">
+
+      <div class="guide-section">
+        <div class="guide-hero">
+          <span class="guide-hero-label">Style Sheet</span>
+          <h1 class="guide-hero-title">Getting Started</h1>
+          <p class="guide-hero-sub">This is a Netflix's design style reference, readable by both humans and AI tools. No design background needed: pick what you need, copy it, and use it directly in your prompts.</p>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <div class="guide-eyebrow">Step by step</div>
+        <h2 class="guide-heading">How to use this style sheet</h2>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="guide-step-img"><img src="assets/step-choose-setup.svg" alt="Choose your setup" class="guide-step-img-src"/></div>
+            <div class="guide-step-content">
+              <div class="guide-step-title">1. Choose your setup</div>
+              <div class="guide-step-body">Pick your scheme and background: dark for most Netflix projects, light for docs and emails.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-img"><img src="assets/step-browse-pick.svg" alt="Browse and pick" class="guide-step-img-src"/></div>
+            <div class="guide-step-content">
+              <div class="guide-step-title">2. Browse and pick</div>
+              <div class="guide-step-body">Use the tabs to find what you need: <strong>Colors</strong> for flat colors, <strong>Gradients</strong> for backgrounds, <strong>Typography</strong> for text styles.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-img"><img src="assets/step-grab-copy.svg" alt="Grab what you need" class="guide-step-img-src"/></div>
+            <div class="guide-step-content">
+              <div class="guide-step-title">3. Grab what you need</div>
+              <div class="guide-step-body">Hover over any card and click the copy icon for a single value. To collect several, click the cards to pin them to the bar at the bottom.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-img"><img src="assets/step-take-with-you.svg" alt="Take it with you" class="guide-step-img-src"/></div>
+            <div class="guide-step-content">
+              <div class="guide-step-title">4. Take it with you</div>
+              <div class="guide-step-body">Hit <strong>Copy</strong> to get everything in one block, or <strong>Download</strong> to save a file you can share or attach directly to an AI prompt.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="guide-section">
+        <div class="guide-eyebrow">Tips</div>
+        <h2 class="guide-heading">Good to know</h2>
+        <div class="guide-tips">
+          <div class="guide-tip"><svg class="guide-tip-check" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="9" fill="currentColor" opacity="0.15"/><path d="M5 9l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Pins reset each time you switch schemes, to keep consistency.</div>
+          <div class="guide-tip"><svg class="guide-tip-check" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="9" fill="currentColor" opacity="0.15"/><path d="M5 9l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Colors are approved and tested for accessibility across different formats.</div>
+          <div class="guide-tip"><svg class="guide-tip-check" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="9" fill="currentColor" opacity="0.15"/><path d="M5 9l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Stuck on a choice? Your design partner is there to help you get it right.</div>
+        </div>
+        <div class="guide-beta-note">
+          <div class="guide-beta-image">
+            <img src="assets/banner-still-growing.svg" alt="Still growing" class="guide-step-img-src"/>
+          </div>
+          <div class="guide-beta-text">
+            <div class="guide-beta-title">Still growing</div>
+            <div class="guide-beta-body">Things will change and improve as feedback comes in. A direct integration with <strong>Claude Cowork</strong> is also in the works.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-faq" data-review-section="FAQ">
+    <div class="guide-page">
+
+      <div class="guide-section">
+        <div class="guide-hero">
+          <span class="guide-hero-label">Style Sheet</span>
+          <h1 class="guide-hero-title">FAQ</h1>
+          <p class="guide-hero-sub">Quick answers to the most common questions about using this style sheet.</p>
+        </div>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-category"><img src="assets/icon-getting-started.svg" width="22" height="22" alt="" aria-hidden="true"/>Getting started</div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            What are the named colors and styles?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Each color, gradient, and text style in this tool has a name. Use that name instead of memorizing exact codes. It keeps your work consistent and makes it easy to reference in prompts or handoffs.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            I'm not a designer. Can I still use this?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Absolutely. This tool is for everyone at Netflix who makes visual content. No design background needed.</div>
+        </div>
+
+        <div class="faq-category"><img src="assets/icon-schemes-modes.svg" width="22" height="22" alt="" aria-hidden="true"/>Schemes and modes</div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            What's the difference between Core, Cool, and Warm?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Three schemes, each with a different feel. Core is the classic red look. Cool is blue-toned, for product and tech. Warm is orange-toned, for creator contexts. Pick one and stick with it.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            When should I use Dark vs Light mode?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Dark for anything that looks like Netflix. Light for docs, emails, and internal tools. Not sure? Drop us a message on <a href="https://netflix.enterprise.slack.com/archives/C052GNEUPC0" target="_blank" rel="noopener">Slack</a>!</div>
+        </div>
+
+        <div class="faq-category"><img src="assets/icon-using-tool.svg" width="22" height="22" alt="" aria-hidden="true"/>Using the tool</div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            How do I copy a color?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Hover over any card and click the copy icon. The value lands on your clipboard, ready to paste.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            What is the pin bar at the bottom?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Your collection tray. Click cards to save them, then hit <strong>Copy</strong> to grab everything at once or <strong>Download</strong> to save a file you can share or attach directly to an AI prompt.</div>
+        </div>
+
+        <div class="faq-category"><img src="assets/icon-colors-typography.svg" width="22" height="22" alt="" aria-hidden="true"/>Colors and typography</div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            Why are there different color categories?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Each one has a purpose. Primary for brand colors, Secondary for backgrounds, Bright for expressive accents, Text for type colors, and Status Colors for links, errors, success, and warnings. Using the right one keeps things consistent.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            Can I use any color on this page?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Yes, everything here is approved. Just don't bring in colors from outside this set. Need something you don't see? Let us know on <a href="https://netflix.enterprise.slack.com/archives/C052GNEUPC0" target="_blank" rel="noopener">Slack</a>!</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            What are the text styles for?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Each text style is ready to use: font, size, weight, and spacing all in one. <strong>Pin</strong> and <strong>Download</strong> it just like a color.</div>
+        </div>
+
+        <div class="faq-category"><img src="assets/icon-support.svg" width="22" height="22" alt="" aria-hidden="true"/>Support</div>
+
+        <div class="faq-item">
+          <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+            Who should I contact with questions?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 8 10 13 15 8"/></svg>
+          </div>
+          <div class="faq-a">Reach out to us on <a href="https://netflix.enterprise.slack.com/archives/C052GNEUPC0" target="_blank" rel="noopener">Slack</a>.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<!-- PIN PANEL (expands above bar) -->
+<div id="pin-panel"></div>
+
+<!-- PIN BAR -->
+<div id="pin-bar">
+  <div class="pin-bar-left">
+    <div class="pin-count-badge" id="pinCountBadge">0</div>
+    <span class="pin-selected-label">Selected</span>
+    <button class="pin-chevron-btn" id="pinChevronBtn" title="Preview selected">
+      <svg class="pin-chevron-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="pin-type-pills" id="pinTypePills"></div>
+  </div>
+  <div class="pin-bar-actions">
+    <button class="pin-clear-btn" id="pinClearBtn">Clear</button>
+    <button class="pin-css-btn" id="pinCssBtn">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+        <rect x="4" y="0.5" width="8.5" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="0.5" y="4" width="8.5" height="8.5" rx="1.5" fill="#1E1E1E" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      Copy CSS
+    </button>
+    <button class="pin-export-btn" id="pinExportBtn">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+        <path d="M6.5 1v7M3.5 5.5l3 3 3-3M1 10v1.5a.5.5 0 00.5.5h11a.5.5 0 00.5-.5V10" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Export .md
+    </button>
+  </div>
+</div>
+
+<button class="review-fab" id="review-fab" aria-label="Open feedback">
+  <img src="assets/icon-feedback.svg" width="24" height="24" alt="" aria-hidden="true"/>
+  <span class="review-fab-label">Feedback</span>
+</button>
+
+<div class="feedback-overlay" id="feedback-overlay">
+  <div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+    <div class="feedback-modal-header">
+      <img src="assets/icon-feedback-modal.svg" width="20" height="20" alt="" aria-hidden="true"/>
+      <span id="feedback-title">Feedback</span>
+    </div>
+    <p class="feedback-modal-sub">Share your thoughts here</p>
+    <input class="feedback-input" id="feedback-name" type="email" placeholder="Your email" />
+    <textarea class="feedback-textarea" id="feedback-text" placeholder="What do you love about it, and what would you change?"></textarea>
+    <div class="feedback-actions">
+      <button class="feedback-refresh-btn" id="feedback-refresh">Refresh</button>
+      <button class="feedback-submit-btn" id="feedback-submit">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+
+const COLOR_DATA = {
+  "Core": {
+    "dark": {
+      "Primary": {
+        "desc": "Main interface color. Use for main buttons and important links.",
+        "swatches": [
+          {"name":"Red 500","hex":"#E50914","role":"Primary brand"},
+          {"name":"Red 800","hex":"#6F181D","role":"Brand dark"},
+          {"name":"Pink 500","hex":"#D3317A","role":"Secondary brand"},
+          {"name":"Purple 500","hex":"#B038DC","role":"Tertiary accent"},
+          {"name":"Purple 800","hex":"#59216E","role":"Tertiary dark"}
+        ]
+      },
+      "Secondary": {
+        "desc": "For main page backgrounds to keep content readable.",
+        "swatches": [
+          {"name":"Red 950","hex":"#210D0E","role":"Deep bg"},
+          {"name":"Red 900","hex":"#461518","role":"Dark bg"},
+          {"name":"Pink 900","hex":"#45172B","role":"Pink deep bg"},
+          {"name":"Purple 950","hex":"#1C0E20","role":"Purple deep bg"},
+          {"name":"Purple 900","hex":"#391945","role":"Purple dark bg"}
+        ]
+      },
+      "Bright": {
+        "desc": "Lighter, more expressive shades for adding visual energy and depth.",
+        "swatches": [
+          {"name":"Red 50","hex":"#F5E1E2","role":"Light 50"},
+          {"name":"Red 100","hex":"#FABCBF","role":"Light 100"},
+          {"name":"Pink 50","hex":"#F5E1EA","role":"Alt 50"},
+          {"name":"Pink 100","hex":"#F6C5DB","role":"Alt 100"},
+          {"name":"Pink 500","hex":"#D3317A","role":"Mid accent"}
+        ]
+      },
+      "Text": {
+        "desc": "Main text color for normal content and headings.",
+        "swatches": [
+          {"name":"White","hex":"#FFFFFF","role":"Primary text"},
+          {"name":"Gray 200","hex":"#E5E5E5","role":"Secondary text"},
+          {"name":"Gray 500","hex":"#808080","role":"Placeholder"},
+          {"name":"Gray Dark","hex":"#414141","role":"Subtle"},
+          {"name":"Black","hex":"#000000","role":"On-color"}
+        ]
+      }
+    },
+    "light": {
+      "Primary": {
+        "desc": "Main interface color. Use for main buttons and important links.",
+        "swatches": [
+          {"name":"Red 600","hex":"#C11119","role":"Primary brand"},
+          {"name":"Red 800","hex":"#6F181D","role":"Brand dark"},
+          {"name":"Pink 600","hex":"#B82869","role":"Secondary brand"},
+          {"name":"Purple 600","hex":"#982DBE","role":"Tertiary accent"},
+          {"name":"Purple 700","hex":"#792A95","role":"Tertiary dark"}
+        ]
+      },
+      "Secondary": {
+        "desc": "For main page backgrounds to keep content readable.",
+        "swatches": [
+          {"name":"Red 50","hex":"#F5E1E2","role":"Light surface"},
+          {"name":"Red 100","hex":"#FABCBF","role":"Tinted surface"},
+          {"name":"Pink 50","hex":"#F5E1EA","role":"Pink bg"},
+          {"name":"Purple 50","hex":"#F0E1F5","role":"Purple bg"},
+          {"name":"Red 200","hex":"#F99297","role":"Stronger tint"}
+        ]
+      },
+      "Bright": {
+        "desc": "Lighter, more expressive shades for adding visual energy and depth.",
+        "swatches": [
+          {"name":"Red 300","hex":"#F7636B","role":"Bright accent"},
+          {"name":"Red 400","hex":"#EB3942","role":"Medium accent"},
+          {"name":"Pink 300","hex":"#F276AE","role":"Pink bright"},
+          {"name":"Pink 400","hex":"#E75094","role":"Pink medium"},
+          {"name":"Purple 300","hex":"#D67DF7","role":"Purple bright"}
+        ]
+      },
+      "Text": {
+        "desc": "Main text color for normal content and headings.",
+        "swatches": [
+          {"name":"Black","hex":"#000000","role":"Primary text"},
+          {"name":"Gray Dark","hex":"#414141","role":"Secondary text"},
+          {"name":"Gray 500","hex":"#808080","role":"Placeholder"},
+          {"name":"Gray 200","hex":"#E5E5E5","role":"Subtle"},
+          {"name":"White","hex":"#FFFFFF","role":"On-color"}
+        ]
+      }
+    }
+  },
+  "Cool": {
+    "dark": {
+      "Primary": {
+        "desc": "Main interface color. Use for main buttons and important links.",
+        "swatches": [
+          {"name":"Indigo 500","hex":"#4061E7","role":"Primary brand"},
+          {"name":"Indigo 800","hex":"#233371","role":"Brand dark"},
+          {"name":"Violet 500","hex":"#6D3BE3","role":"Secondary brand"},
+          {"name":"Purple 500","hex":"#B038DC","role":"Tertiary accent"},
+          {"name":"Purple 800","hex":"#59216E","role":"Tertiary dark"}
+        ]
+      },
+      "Secondary": {
+        "desc": "For main page backgrounds to keep content readable.",
+        "swatches": [
+          {"name":"Indigo 950","hex":"#0D1121","role":"Deep bg"},
+          {"name":"Indigo 900","hex":"#192247","role":"Dark bg"},
+          {"name":"Violet 900","hex":"#251743","role":"Violet deep bg"},
+          {"name":"Purple 950","hex":"#1C0E20","role":"Purple deep bg"},
+          {"name":"Purple 900","hex":"#391945","role":"Purple dark bg"}
+        ]
+      },
+      "Bright": {
+        "desc": "Lighter, more expressive shades for adding visual energy and depth.",
+        "swatches": [
+          {"name":"Indigo 50","hex":"#E1E5F5","role":"Light 50"},
+          {"name":"Indigo 100","hex":"#C7D2FC","role":"Light 100"},
+          {"name":"Violet 50","hex":"#E4DCF5","role":"Alt 50"},
+          {"name":"Violet 100","hex":"#D3C2FB","role":"Alt 100"},
+          {"name":"Violet 500","hex":"#6D3BE3","role":"Mid accent"}
+        ]
+      },
+      "Text": {
+        "desc": "Main text color for normal content and headings.",
+        "swatches": [
+          {"name":"White","hex":"#FFFFFF","role":"Primary text"},
+          {"name":"Gray 200","hex":"#E5E5E5","role":"Secondary text"},
+          {"name":"Gray 500","hex":"#808080","role":"Placeholder"},
+          {"name":"Gray Dark","hex":"#414141","role":"Subtle"},
+          {"name":"Black","hex":"#000000","role":"On-color"}
+        ]
+      }
+    },
+    "light": {
+      "Primary": {
+        "desc": "Main interface color. Use for main buttons and important links.",
+        "swatches": [
+          {"name":"Indigo 600","hex":"#3451C5","role":"Primary brand"},
+          {"name":"Indigo 800","hex":"#233371","role":"Brand dark"},
+          {"name":"Violet 600","hex":"#5C32BF","role":"Secondary brand"},
+          {"name":"Purple 600","hex":"#982DBE","role":"Tertiary accent"},
+          {"name":"Purple 700","hex":"#792A95","role":"Tertiary dark"}
+        ]
+      },
+      "Secondary": {
+        "desc": "For main page backgrounds to keep content readable.",
+        "swatches": [
+          {"name":"Indigo 50","hex":"#E1E5F5","role":"Light surface"},
+          {"name":"Indigo 100","hex":"#C7D2FC","role":"Tinted surface"},
+          {"name":"Violet 50","hex":"#E4DCF5","role":"Violet bg"},
+          {"name":"Purple 50","hex":"#F0E1F5","role":"Purple bg"},
+          {"name":"Indigo 200","hex":"#A9B9FA","role":"Stronger tint"}
+        ]
+      },
+      "Bright": {
+        "desc": "Lighter, more expressive shades for adding visual energy and depth.",
+        "swatches": [
+          {"name":"Indigo 300","hex":"#889FF9","role":"Bright accent"},
+          {"name":"Indigo 400","hex":"#5B79F1","role":"Medium accent"},
+          {"name":"Violet 300","hex":"#A37EFA","role":"Violet bright"},
+          {"name":"Violet 400","hex":"#885BF1","role":"Violet medium"},
+          {"name":"Purple 300","hex":"#D67DF7","role":"Purple bright"}
+        ]
+      },
+      "Text": {
+        "desc": "Main text color for normal content and headings.",
+        "swatches": [
+          {"name":"Black","hex":"#000000","role":"Primary text"},
+          {"name":"Gray Dark","hex":"#414141","role":"Secondary text"},
+          {"name":"Gray 500","hex":"#808080","role":"Placeholder"},
+          {"name":"Gray 200","hex":"#E5E5E5","role":"Subtle"},
+          {"name":"White","hex":"#FFFFFF","role":"On-color"}
+        ]
+      }
+    }
+  },
+  "Warm": {
+    "dark": {
+      "Primary": {
+        "desc": "Main interface color. Use for main buttons and important links.",
+        "swatches": [
+          {"name":"Orange 500","hex":"#DB5B24","role":"Primary brand"},
+          {"name":"Orange 800","hex":"#6F351C","role":"Brand dark"},
+          {"name":"Yellow 500","hex":"#C3830E","role":"Secondary brand"},
+          {"name":"Amber 500","hex":"#DA7516","role":"Tertiary accent"},
+          {"name":"Amber 800","hex":"#6A411A","role":"Tertiary dark"}
+        ]
+      },
+      "Secondary": {
+        "desc": "For main page backgrounds to keep content readable.",
+        "swatches": [
+          {"name":"Orange 950","hex":"#21130D","role":"Deep bg"},
+          {"name":"Orange 900","hex":"#462516","role":"Dark bg"},
+          {"name":"Yellow 900","hex":"#3F3014","role":"Yellow deep bg"},
+          {"name":"Amber 950","hex":"#21170D","role":"Amber deep bg"},
+          {"name":"Amber 900","hex":"#432C15","role":"Amber dark bg"}
+        ]
+      },
+      "Bright": {
+        "desc": "Lighter, more expressive shades for adding visual energy and depth.",
+        "swatches": [
+          {"name":"Orange 50","hex":"#F7E6DF","role":"Light 50"},
+          {"name":"Orange 100","hex":"#FFD0BB","role":"Light 100"},
+          {"name":"Yellow 50","hex":"#F7EFDF","role":"Alt 50"},
+          {"name":"Yellow 100","hex":"#F7E0B5","role":"Alt 100"},
+          {"name":"Yellow 500","hex":"#C3830E","role":"Mid accent"}
+        ]
+      },
+      "Text": {
+        "desc": "Main text color for normal content and headings.",
+        "swatches": [
+          {"name":"White","hex":"#FFFFFF","role":"Primary text"},
+          {"name":"Gray 200","hex":"#E5E5E5","role":"Secondary text"},
+          {"name":"Gray 500","hex":"#808080","role":"Placeholder"},
+          {"name":"Gray Dark","hex":"#414141","role":"Subtle"},
+          {"name":"Black","hex":"#000000","role":"On-color"}
+        ]
+      }
+    },
+    "light": {
+      "Primary": {
+        "desc": "Main interface color. Use for main buttons and important links.",
+        "swatches": [
+          {"name":"Orange 600","hex":"#C14D1C","role":"Primary brand"},
+          {"name":"Orange 800","hex":"#6F351C","role":"Brand dark"},
+          {"name":"Yellow 600","hex":"#9F6C0F","role":"Secondary brand"},
+          {"name":"Amber 600","hex":"#B56012","role":"Tertiary accent"},
+          {"name":"Amber 700","hex":"#92551B","role":"Tertiary dark"}
+        ]
+      },
+      "Secondary": {
+        "desc": "For main page backgrounds to keep content readable.",
+        "swatches": [
+          {"name":"Orange 50","hex":"#F7E6DF","role":"Light surface"},
+          {"name":"Orange 100","hex":"#FFD0BB","role":"Tinted surface"},
+          {"name":"Yellow 50","hex":"#F7EFDF","role":"Yellow bg"},
+          {"name":"Amber 50","hex":"#F7EBDF","role":"Amber bg"},
+          {"name":"Orange 200","hex":"#FBB698","role":"Stronger tint"}
+        ]
+      },
+      "Bright": {
+        "desc": "Lighter, more expressive shades for adding visual energy and depth.",
+        "swatches": [
+          {"name":"Orange 300","hex":"#F7976E","role":"Bright accent"},
+          {"name":"Orange 400","hex":"#EF7744","role":"Medium accent"},
+          {"name":"Yellow 300","hex":"#E5B55D","role":"Yellow bright"},
+          {"name":"Yellow 400","hex":"#D89D31","role":"Yellow medium"},
+          {"name":"Amber 300","hex":"#F2AB68","role":"Amber bright"}
+        ]
+      },
+      "Text": {
+        "desc": "Main text color for normal content and headings.",
+        "swatches": [
+          {"name":"Black","hex":"#000000","role":"Primary text"},
+          {"name":"Gray Dark","hex":"#414141","role":"Secondary text"},
+          {"name":"Gray 500","hex":"#808080","role":"Placeholder"},
+          {"name":"Gray 200","hex":"#E5E5E5","role":"Subtle"},
+          {"name":"White","hex":"#FFFFFF","role":"On-color"}
+        ]
+      }
+    }
+  }
+};
+
+const SEMANTIC_FG_TOKENS = [
+  { names: ['foreground-system-announce', 'foreground-system-link'], dark: '#448EF4', light: '#1D63C4', displayName: 'Highlight', uses: 'Announce · Link' },
+  { names: ['foreground-system-error'],   dark: '#EB3942', light: '#C11119', displayName: 'Alert', uses: 'Error' },
+  { names: ['foreground-system-success'], dark: '#2BB871', light: '#0C8849', displayName: 'Success', uses: 'Complete · Valid' },
+  { names: ['foreground-system-warning'], dark: '#D89D31', light: '#9F6C0F', displayName: 'Warning', uses: 'Caution · Notice' },
+];
+
+const GRADIENT_DATA = {
+  "Core": {
+    "Core Gradients": {
+      "desc": "The main brand blends, bold and high-impact.",
+      "items": [
+        {"name":"Red Depth","from":"#E50914","to":"#461518","role":"Brand depth"},
+        {"name":"Red to Pink","from":"#E50914","to":"#D3317A","role":"Brand blend"},
+        {"name":"Pink to Purple","from":"#D3317A","to":"#B038DC","role":"Accent range"}
+      ]
+    },
+    "Dark Gradients": {
+      "desc": "Deep, moody gradients for dark backgrounds and overlays.",
+      "items": [
+        {"name":"Dark Red Depth","from":"#8B1018","to":"#210D0E","role":"Dark overlay"},
+        {"name":"Red to Pink Dark","from":"#6F181D","to":"#45172B","role":"Deep blend"},
+        {"name":"Pink to Purple Dark","from":"#7A1D3E","to":"#391945","role":"Deep accent"}
+      ]
+    },
+    "Light Gradients": {
+      "desc": "Soft, airy gradients for light mode surfaces.",
+      "items": [
+        {"name":"Red Light","from":"#F5E1E2","to":"#F99297","role":"Light surface"},
+        {"name":"Red to Pink Light","from":"#FABCBF","to":"#F6C5DB","role":"Tinted blend"},
+        {"name":"Pink to Purple Light","from":"#F5E1EA","to":"#F0E1F5","role":"Soft accent"}
+      ]
+    }
+  },
+  "Cool": {
+    "Core Gradients": {
+      "desc": "The main brand blends, bold and high-impact.",
+      "items": [
+        {"name":"Indigo Depth","from":"#4061E7","to":"#192247","role":"Brand depth"},
+        {"name":"Indigo to Violet","from":"#4061E7","to":"#6D3BE3","role":"Brand blend"},
+        {"name":"Violet to Purple","from":"#6D3BE3","to":"#B038DC","role":"Accent range"}
+      ]
+    },
+    "Dark Gradients": {
+      "desc": "Deep, moody gradients for dark backgrounds and overlays.",
+      "items": [
+        {"name":"Dark Indigo Depth","from":"#2A3F9E","to":"#0D1121","role":"Dark overlay"},
+        {"name":"Indigo to Violet Dark","from":"#233371","to":"#251743","role":"Deep blend"},
+        {"name":"Violet to Purple Dark","from":"#4A2B9E","to":"#391945","role":"Deep accent"}
+      ]
+    },
+    "Light Gradients": {
+      "desc": "Soft, airy gradients for light mode surfaces.",
+      "items": [
+        {"name":"Indigo Light","from":"#E1E5F5","to":"#A9B9FA","role":"Light surface"},
+        {"name":"Indigo to Violet Light","from":"#C7D2FC","to":"#D3C2FB","role":"Tinted blend"},
+        {"name":"Violet to Purple Light","from":"#E4DCF5","to":"#F0E1F5","role":"Soft accent"}
+      ]
+    }
+  },
+  "Warm": {
+    "Core Gradients": {
+      "desc": "The main brand blends, bold and high-impact.",
+      "items": [
+        {"name":"Orange Depth","from":"#DB5B24","to":"#462516","role":"Brand depth"},
+        {"name":"Orange to Yellow","from":"#DB5B24","to":"#C3830E","role":"Brand blend"},
+        {"name":"Yellow to Amber","from":"#C3830E","to":"#DA7516","role":"Accent range"}
+      ]
+    },
+    "Dark Gradients": {
+      "desc": "Deep, moody gradients for dark backgrounds and overlays.",
+      "items": [
+        {"name":"Dark Orange Depth","from":"#9E4118","to":"#21130D","role":"Dark overlay"},
+        {"name":"Orange to Yellow Dark","from":"#6F351C","to":"#3F3014","role":"Deep blend"},
+        {"name":"Yellow to Amber Dark","from":"#5E4A10","to":"#432C15","role":"Deep accent"}
+      ]
+    },
+    "Light Gradients": {
+      "desc": "Soft, airy gradients for light mode surfaces.",
+      "items": [
+        {"name":"Orange Light","from":"#F7E6DF","to":"#FBB698","role":"Light surface"},
+        {"name":"Orange to Yellow Light","from":"#FFD0BB","to":"#F7E0B5","role":"Tinted blend"},
+        {"name":"Yellow to Amber Light","from":"#F7EFDF","to":"#F7EBDF","role":"Soft accent"}
+      ]
+    }
+  }
+};
+
+const SCHEME_COLORS = { Core: "#E50914", Cool: "#4061E7", Warm: "#DB5B24" };
+
+const TYPOGRAPHY_DATA = [
+  { group: 'Display', styles: [
+    { token: 'display-extralarge',           sample: 'Stories',                fontName: 'Netflix Sans Medium',    size: 160, weight: 500, lineHeight: 160, letterSpacing: -6.4,  textTransform: '',          usage: 'Full-screen titles and high-impact opening moments' },
+    { token: 'display-extralarge-condensed', sample: 'Stories',                fontName: 'Netflix Sans Bold Cd',   size: 190, weight: 700, lineHeight: 190, letterSpacing: -7.6,  textTransform: '',          usage: 'Big, tight headlines for posters and large-format visuals' },
+    { token: 'display-large',                sample: 'Stories Worth Watching', fontName: 'Netflix Sans Black',     size: 64,  weight: 900, lineHeight: 80,  letterSpacing: 0,     textTransform: '',          usage: 'Large headlines for covers and featured sections' },
+    { token: 'display',                      sample: 'Unlimited Entertainment',fontName: 'Netflix Sans Black',     size: 56,  weight: 900, lineHeight: 70,  letterSpacing: 0,     textTransform: '',          usage: 'Bold headlines for featured content' },
+    { token: 'display-small',                sample: 'Watch Anywhere, Anytime',fontName: 'Netflix Sans Black',     size: 48,  weight: 900, lineHeight: 60,  letterSpacing: 0,     textTransform: '',          usage: 'Mid-size headlines and section openers' }
+  ]},
+  { group: 'Headline', styles: [
+    { token: 'headline-large',  sample: 'New Releases This Week', fontName: 'Netflix Sans Bold',    size: 40, weight: 700, lineHeight: 50, letterSpacing: 0, textTransform: '', usage: 'Primary section titles and feature headings' },
+    { token: 'headline',        sample: 'Top Picks for You',      fontName: 'Netflix Sans Bold',    size: 36, weight: 700, lineHeight: 45, letterSpacing: 0, textTransform: '', usage: 'Section headings and content area titles' },
+    { token: 'headline-small',  sample: 'Continue Watching',      fontName: 'Netflix Sans Bold',    size: 32, weight: 700, lineHeight: 40, letterSpacing: 0, textTransform: '', usage: 'Smaller section headings and sub-page titles' }
+  ]},
+  { group: 'Title', styles: [
+    { token: 'title-all-caps',      sample: 'NEW RELEASES',         fontName: 'Netflix Sans Medium',  size: 24, weight: 500, lineHeight: 40, letterSpacing: 2, textTransform: 'uppercase', usage: 'Category labels and section tags in all caps' },
+    { token: 'title-large-heavy',   sample: 'My List',              fontName: 'Netflix Sans Medium',  size: 24, weight: 500, lineHeight: 30, letterSpacing: 0,   textTransform: '',          usage: 'Bold titles for content rows and featured sections' },
+    { token: 'title-large',         sample: 'Trending Now',         fontName: 'Netflix Sans Regular', size: 24, weight: 400, lineHeight: 30, letterSpacing: 0,   textTransform: '',          usage: 'Titles for content rows and sections' },
+    { token: 'title-heavy',         sample: 'Because You Watched',  fontName: 'Netflix Sans Medium',  size: 20, weight: 500, lineHeight: 30, letterSpacing: 0,   textTransform: '',          usage: 'Bold labels for buttons and key content titles' },
+    { token: 'title',               sample: 'Popular on Netflix',   fontName: 'Netflix Sans Regular', size: 20, weight: 400, lineHeight: 30, letterSpacing: 0,   textTransform: '',          usage: 'Standard titles and button labels' },
+    { token: 'title-small-heavy',   sample: 'Original Series',      fontName: 'Netflix Sans Medium',  size: 18, weight: 500, lineHeight: 27, letterSpacing: 0,   textTransform: '',          usage: 'Prominent secondary headings and sub-sections' },
+    { token: 'title-small',         sample: 'Award-Winning Films',  fontName: 'Netflix Sans Regular', size: 18, weight: 400, lineHeight: 27, letterSpacing: 0,   textTransform: '',          usage: 'Secondary headings and sub-section labels' }
+  ]},
+  { group: 'Body', styles: [
+    { token: 'body-heavy',       sample: 'Discover something new every day with thousands of titles across all genres.', fontName: 'Netflix Sans Medium',  size: 16, weight: 500, lineHeight: 24, letterSpacing: 0, textTransform: '', usage: 'Emphasized reading text and key descriptions' },
+    { token: 'body',             sample: 'Stream on any device: TV, laptop, phone, or tablet, wherever you are.',      fontName: 'Netflix Sans Regular', size: 16, weight: 400, lineHeight: 24, letterSpacing: 0, textTransform: '', usage: 'Standard reading text and content summaries' },
+    { token: 'body-small-heavy', sample: 'Cancel anytime. No commitments, no hassle.',                                   fontName: 'Netflix Sans Medium',  size: 14, weight: 500, lineHeight: 21, letterSpacing: 0, textTransform: '', usage: 'Emphasized small body text and captions' },
+    { token: 'body-small',       sample: 'Available on TV, phone, tablet, and laptop.',                                  fontName: 'Netflix Sans Regular', size: 14, weight: 400, lineHeight: 21, letterSpacing: 0, textTransform: '', usage: 'Small reading text, captions, and descriptions' }
+  ]},
+  { group: 'Label', styles: [
+    { token: 'label-large', sample: "See What's New",  fontName: 'Netflix Sans Regular', size: 13, weight: 400, lineHeight: 20,   letterSpacing: 0, textTransform: '', usage: 'Small labels and supporting information' },
+    { token: 'label-heavy', sample: 'Add to My List', fontName: 'Netflix Sans Medium',  size: 12, weight: 700, lineHeight: 18, letterSpacing: 0, textTransform: '', usage: 'Emphasized small labels and captions' },
+    { token: 'label',       sample: 'Add to My List', fontName: 'Netflix Sans Regular', size: 12, weight: 400, lineHeight: 18,   letterSpacing: 0, textTransform: '', usage: 'Standard small labels and captions' }
+  ]}
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+
+let currentMode = 'dark';
+let currentScheme = 'Core';
+let currentTab = 'getting-started';
+let accordionStates = {};
+
+// pinnedItems: { [schemeMode]: Array<{id, type, name, hex, cssVal, role, from, to}> }
+let pinnedItems = {};
+let panelOpen = false;
+
+function pinKey() { return `${currentScheme}-${currentMode}`; }
+function getPinned() { return pinnedItems[pinKey()] || []; }
+function setPinned(arr) { pinnedItems[pinKey()] = arr; }
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+
+const $ = id => document.getElementById(id);
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+function copyText(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+}
+
+// ── PIN MANAGEMENT ────────────────────────────────────────────────────────────
+
+function togglePin(item) {
+  const arr = getPinned();
+  const idx = arr.findIndex(p => p.id === item.id);
+  if (idx === -1) {
+    setPinned([...arr, item]);
+  } else {
+    setPinned(arr.filter(p => p.id !== item.id));
+  }
+  updatePinBar();
+  refreshPinnedStates();
+  if (panelOpen) renderPinPanel();
+}
+
+function isPinned(id) {
+  return getPinned().some(p => p.id === id);
+}
+
+function refreshPinnedStates() {
+  document.querySelectorAll('[data-pin-id]').forEach(el => {
+    const id = el.dataset.pinId;
+    el.classList.toggle('pinned', isPinned(id));
+  });
+}
+
+function updatePinBar() {
+  const arr = getPinned();
+  const bar = $('pin-bar');
+  if (arr.length === 0) {
+    bar.classList.remove('visible');
+    closePinPanel();
+    return;
+  }
+
+  bar.classList.add('visible');
+  requestAnimationFrame(syncPinPanelOffset);
+  $('pinCountBadge').textContent = arr.length;
+
+  const colorCount = arr.filter(p => p.type === 'color').length;
+  const gradCount = arr.filter(p => p.type === 'gradient').length;
+  const typeCount = arr.filter(p => p.type === 'type').length;
+  const pills = $('pinTypePills');
+  pills.innerHTML = '';
+  if (colorCount > 0) {
+    pills.innerHTML += `<span class="pin-type-pill"><span class="pin-type-dot" style="background:${SCHEME_COLORS[currentScheme]}"></span>${colorCount} Color${colorCount > 1 ? 's' : ''}</span>`;
+  }
+  if (gradCount > 0) {
+    pills.innerHTML += `<span class="pin-type-pill"><span class="pin-type-dot" style="background:#4A80E8"></span>${gradCount} Gradient${gradCount > 1 ? 's' : ''}</span>`;
+  }
+  if (typeCount > 0) {
+    pills.innerHTML += `<span class="pin-type-pill"><span class="pin-type-dot" style="background:#AAAAAA"></span>${typeCount} Type Style${typeCount > 1 ? 's' : ''}</span>`;
+  }
+
+  // Update scheme color on badge and export btn
+  document.documentElement.style.setProperty('--scheme-primary', SCHEME_COLORS[currentScheme]);
+}
+
+function closePinPanel() {
+  panelOpen = false;
+  $('pin-panel').classList.remove('visible');
+  $('pin-bar').classList.remove('pin-panel-open');
+}
+
+function renderPinPanel() {
+  const panel = $('pin-panel');
+  const arr = getPinned();
+  panel.innerHTML = arr.map(item => {
+    let swatchHtml;
+    if (item.type === 'color') {
+      swatchHtml = `<div class="pin-preview-swatch" style="background:${item.hex}"></div>`;
+    } else if (item.type === 'gradient') {
+      swatchHtml = `<div class="pin-preview-swatch" style="background:linear-gradient(135deg,${item.from},${item.to})"></div>`;
+    } else {
+      const ls = item.letterSpacing ? `letter-spacing:${item.letterSpacing}px;` : '';
+      const tt = item.textTransform ? `text-transform:${item.textTransform};` : '';
+      swatchHtml = `<div class="pin-preview-swatch" style="background:#1A1A1A;display:flex;align-items:center;padding:0 8px;overflow:hidden;"><span style="font-family:var(--font-sans);font-size:${Math.min(item.size, 14)}px;font-weight:${item.weight};${ls}${tt}color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.sample}</span></div>`;
+    }
+    return `
+      <div class="pin-preview-item" data-unpin="${item.id}">
+        ${swatchHtml}
+        <span class="pin-preview-name">${item.name}</span>
+        <span class="pin-preview-remove">✕</span>
+      </div>
+    `;
+  }).join('');
+
+  panel.querySelectorAll('[data-unpin]').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.dataset.unpin;
+      setPinned(getPinned().filter(p => p.id !== id));
+      updatePinBar();
+      refreshPinnedStates();
+      renderPinPanel();
+      if (getPinned().length === 0) closePinPanel();
+    });
+  });
+}
+
+function copyPinnedCSS() {
+  const arr = getPinned();
+  if (!arr.length) return;
+  const css = arr.map(item => {
+    if (item.type === 'color') {
+      return `/* ${item.name} — ${item.role} */\nbackground-color: ${item.hex};`;
+    } else if (item.type === 'gradient') {
+      return `/* ${item.name} — ${item.role} */\nbackground: linear-gradient(135deg, ${item.from}, ${item.to});`;
+    } else {
+      const lsStr = item.letterSpacing ? `${item.letterSpacing}px` : 'normal';
+      const ttLine = item.textTransform ? `\ntext-transform: ${item.textTransform};` : '';
+      return `/* --type-${item.token} */\nfont-family: '${item.fontName}', 'Inter', sans-serif;\nfont-size: ${item.size}px;\nfont-weight: ${item.weight};\nline-height: ${item.lineHeight}px;\nletter-spacing: ${lsStr};${ttLine}`;
+    }
+  }).join('\n\n');
+  copyText(css);
+  showToast(`Copied CSS for ${arr.length} item${arr.length > 1 ? 's' : ''}`);
+}
+
+function exportPinnedMD() {
+  const arr = getPinned();
+  const modeLabel = currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
+  let md = `# Style Sheet — ${currentScheme} ${modeLabel} (Selected)\n\n`;
+
+  const colors = arr.filter(p => p.type === 'color');
+  const grads = arr.filter(p => p.type === 'gradient');
+  const types = arr.filter(p => p.type === 'type');
+
+  if (colors.length) {
+    md += `## Colors\n\n| Name | Hex | Role |\n|------|-----|------|\n`;
+    colors.forEach(c => { md += `| ${c.name} | ${c.hex} | ${c.role} |\n`; });
+    md += '\n';
+  }
+
+  if (grads.length) {
+    md += `## Gradients\n\n| Name | From | To | Role |\n|------|------|----|------|\n`;
+    grads.forEach(g => { md += `| ${g.name} | ${g.from} | ${g.to} | ${g.role} |\n`; });
+    md += '\n';
+  }
+
+  if (types.length) {
+    md += `## Typography\n\n| Token | Font | Size | LH | Weight | Tracking |\n|-------|------|------|----|--------|----------|\n`;
+    types.forEach(t => {
+      const ls = t.letterSpacing ? `${t.letterSpacing}px` : '—';
+      md += `| ${t.token} | ${t.fontName} | ${t.size}px | ${t.lineHeight}px | ${t.weight} | ${ls} |\n`;
+    });
+    md += '\n';
+  }
+
+  const blob = new Blob([md], {type: 'text/markdown'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `style-sheet-${currentScheme.toLowerCase()}-${currentMode}-selected.md`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Exported selected tokens');
+}
+
+// ── COPY ICON SVG ─────────────────────────────────────────────────────────────
+
+const COPY_ICON_SVG = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4.5" y="0.5" width="9" height="9" rx="1.5" stroke="white" stroke-width="1.2"/>
+  <rect x="0.5" y="4.5" width="9" height="9" rx="1.5" fill="rgba(0,0,0,0.5)" stroke="white" stroke-width="1.2"/>
+</svg>`;
+
+// ── RENDER: COLORS ────────────────────────────────────────────────────────────
+
+function renderColors() {
+  const container = $('colors-accordions');
+  const data = COLOR_DATA[currentScheme][currentMode];
+  const categories = Object.keys(data);
+  container.innerHTML = '';
+
+  categories.forEach((cat, catIdx) => {
+    const { desc, swatches } = data[cat];
+    const key = `colors-${cat}`;
+    const isOpen = accordionStates[key] !== false;
+
+    const acc = document.createElement('div');
+    acc.className = 'accordion' + (isOpen ? ' open' : '');
+
+    const swatchesHtml = swatches.map((s, i) => {
+      const id = `color-${currentScheme}-${currentMode}-${cat}-${i}`;
+      return `
+        <div class="swatch-card" data-pin-id="${id}">
+          <div class="swatch-color" style="background-color:${s.hex}">
+            <button class="swatch-copy-icon" data-hex="${s.hex}" aria-label="Copy hex ${s.hex}" title="Copy hex">${COPY_ICON_SVG}</button>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">${s.name}</div>
+            <div class="swatch-hex">${s.hex}</div>
+            <div class="swatch-role">${s.role}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    acc.innerHTML = `
+      <div class="accordion-header" aria-expanded="${isOpen}" role="button" tabindex="0">
+        <span class="accordion-title">${cat} Colors</span>
+        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-inner">
+          <div class="accordion-desc-block">${desc}</div>
+          <div class="swatches-grid">${swatchesHtml}</div>
+        </div>
+      </div>
+    `;
+
+    // Accordion toggle
+    acc.querySelector('.accordion-header').addEventListener('click', () => {
+      const open = acc.classList.toggle('open');
+      accordionStates[key] = open;
+      acc.querySelector('.accordion-header').setAttribute('aria-expanded', open);
+    });
+
+    // Copy icon: copy hex, stop propagation
+    acc.querySelectorAll('.swatch-copy-icon').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const hex = btn.dataset.hex;
+        copyText(hex);
+        btn.classList.add('flashed');
+        setTimeout(() => btn.classList.remove('flashed'), 600);
+        showToast(`Copied ${hex}`);
+      });
+    });
+
+    // Card click: toggle pin
+    acc.querySelectorAll('.swatch-card').forEach((card, i) => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('.swatch-copy-icon')) return;
+        const id = card.dataset.pinId;
+        const s = swatches[i];
+        togglePin({ id, type: 'color', name: s.name, hex: s.hex, role: s.role, cssVal: `background-color: ${s.hex};` });
+      });
+    });
+
+    container.appendChild(acc);
+  });
+
+  // Status Colors accordion
+  const semKey = 'colors-semantic';
+  const semOpen = accordionStates[semKey] !== false;
+  const semAcc = document.createElement('div');
+  semAcc.className = 'accordion' + (semOpen ? ' open' : '');
+
+  const semSwatches = SEMANTIC_FG_TOKENS.map((token, i) => {
+    const hex = currentMode === 'dark' ? token.dark : token.light;
+    const name = token.displayName;
+    const role = token.uses;
+    const id = `semantic-${i}`;
+    return { hex, name, role, id };
+  });
+
+  const semSwatchesHtml = semSwatches.map(s => `
+    <div class="swatch-card" data-pin-id="${s.id}">
+      <div class="swatch-color" style="background-color:${s.hex}">
+        <button class="swatch-copy-icon" data-hex="${s.hex}" aria-label="Copy hex ${s.hex}" title="Copy hex">${COPY_ICON_SVG}</button>
+      </div>
+      <div class="swatch-info">
+        <div class="swatch-name">${s.name}</div>
+        <div class="swatch-hex">${s.hex}</div>
+        <div class="swatch-role">${s.role}</div>
+      </div>
+    </div>
+  `).join('');
+
+  semAcc.innerHTML = `
+    <div class="accordion-header" aria-expanded="${semOpen}" role="button" tabindex="0">
+      <span class="accordion-title">Status Colors</span>
+      <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-inner">
+        <div class="accordion-desc-block">Status colors that carry meaning: used for links, errors, success messages, and warnings. Works across all schemes.</div>
+        <div class="swatches-grid">${semSwatchesHtml}</div>
+      </div>
+    </div>
+  `;
+
+  semAcc.querySelector('.accordion-header').addEventListener('click', () => {
+    const open = semAcc.classList.toggle('open');
+    accordionStates[semKey] = open;
+    semAcc.querySelector('.accordion-header').setAttribute('aria-expanded', open);
+  });
+
+  semAcc.querySelectorAll('.swatch-copy-icon').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const hex = btn.dataset.hex;
+      copyText(hex);
+      btn.classList.add('flashed');
+      setTimeout(() => btn.classList.remove('flashed'), 600);
+      showToast(`Copied ${hex}`);
+    });
+  });
+
+  semAcc.querySelectorAll('.swatch-card').forEach((card, i) => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('.swatch-copy-icon')) return;
+      const s = semSwatches[i];
+      togglePin({ id: s.id, type: 'color', name: s.name, hex: s.hex, role: s.role, cssVal: `color: ${s.hex};` });
+    });
+  });
+
+  container.appendChild(semAcc);
+
+  refreshPinnedStates();
+}
+
+// ── RENDER: GRADIENTS ─────────────────────────────────────────────────────────
+
+function renderGradients() {
+  const container = $('gradients-accordions');
+  const data = GRADIENT_DATA[currentScheme];
+  const categories = Object.keys(data);
+  container.innerHTML = '';
+
+  categories.forEach((cat, catIdx) => {
+    const { desc, items } = data[cat];
+    const key = `gradients-${cat}`;
+    const isOpen = accordionStates[key] !== false;
+
+    const acc = document.createElement('div');
+    acc.className = 'accordion' + (isOpen ? ' open' : '');
+
+    const cardsHtml = items.map((g, i) => {
+      const id = `gradient-${currentScheme}-${cat}-${i}`;
+      const cssVal = `linear-gradient(135deg, ${g.from}, ${g.to})`;
+      const cssCopy = `background: linear-gradient(135deg, ${g.from}, ${g.to});`;
+      return `
+        <div class="gradient-card" data-pin-id="${id}">
+          <div class="gradient-strip-wrap">
+            <div class="gradient-strip" style="background:${cssVal}"></div>
+            <button class="swatch-copy-icon" data-css="${cssCopy}" aria-label="Copy CSS for ${g.name}" title="Copy CSS">${COPY_ICON_SVG}</button>
+          </div>
+          <div class="gradient-info">
+            <span class="gradient-name">${g.name}</span>
+            <span class="gradient-css-label">${cssVal}</span>
+            <span class="gradient-role">${g.role}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    acc.innerHTML = `
+      <div class="accordion-header" aria-expanded="${isOpen}" role="button" tabindex="0">
+        <span class="accordion-title">${cat}</span>
+        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-inner">
+          <div class="accordion-desc-block">${desc}</div>
+          ${cardsHtml}
+        </div>
+      </div>
+    `;
+
+    acc.querySelector('.accordion-header').addEventListener('click', () => {
+      const open = acc.classList.toggle('open');
+      accordionStates[key] = open;
+      acc.querySelector('.accordion-header').setAttribute('aria-expanded', open);
+    });
+
+    acc.querySelectorAll('.swatch-copy-icon').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const css = btn.dataset.css;
+        copyText(css);
+        btn.classList.add('flashed');
+        setTimeout(() => btn.classList.remove('flashed'), 600);
+        showToast('Copied gradient CSS');
+      });
+    });
+
+    acc.querySelectorAll('.gradient-card').forEach((card, i) => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('.swatch-copy-icon')) return;
+        const id = card.dataset.pinId;
+        const g = items[i];
+        const cssVal = `linear-gradient(135deg, ${g.from}, ${g.to})`;
+        togglePin({ id, type: 'gradient', name: g.name, role: g.role, from: g.from, to: g.to, cssVal });
+      });
+    });
+
+    container.appendChild(acc);
+  });
+
+  refreshPinnedStates();
+}
+
+// ── RENDER: TYPOGRAPHY ────────────────────────────────────────────────────────
+
+function renderTypography() {
+  const container = $('tab-typography');
+  const allStyles = TYPOGRAPHY_DATA.flatMap(g => g.styles);
+
+  container.innerHTML = TYPOGRAPHY_DATA.map((group, gi) => {
+    const num = String(gi + 1).padStart(2, '0');
+    const key = `typo-${group.group}`;
+    const isOpen = accordionStates[key] !== false;
+
+    const cards = group.styles.map(style => {
+      const id = `typo-${style.token}`;
+      const pinnedClass = isPinned(id) ? ' pinned' : '';
+      const sampleH = Math.min(180, Math.max(80, style.size * 1.3));
+      const lsStr = style.letterSpacing ? `${style.letterSpacing}px` : 'normal';
+      const sampleStyle = [
+        `font-size:${style.size}px`,
+        `font-weight:${style.weight}`,
+        `line-height:${style.lineHeight}px`,
+        `letter-spacing:${lsStr}`,
+        style.textTransform ? `text-transform:${style.textTransform}` : ''
+      ].filter(Boolean).join(';');
+      const lsSpec = style.letterSpacing ? `${style.letterSpacing}px` : '—';
+
+      return `
+        <div class="type-card${pinnedClass}" data-pin-id="${id}">
+          <div class="type-sample-area" style="height:${sampleH}px">
+            <div class="type-sample-text" style="${sampleStyle}">${style.sample}</div>
+          </div>
+          <div class="type-meta">
+            <div class="type-meta-main">
+              <div class="type-token">${style.token}</div>
+              <div class="type-font-name">${style.fontName}</div>
+            </div>
+            <div class="type-spec-group">
+              <div class="type-spec-label">SIZE / LH</div>
+              <div class="type-spec-value">${style.size}px / ${style.lineHeight}px</div>
+            </div>
+            <div class="type-spec-group">
+              <div class="type-spec-label">WEIGHT</div>
+              <div class="type-spec-value">${style.weight}</div>
+            </div>
+            <div class="type-spec-group">
+              <div class="type-spec-label">TRACKING</div>
+              <div class="type-spec-value">${lsSpec}</div>
+            </div>
+            <div class="type-usage">${style.usage}</div>
+          </div>
+          <button class="type-copy-btn" title="Copy CSS">${COPY_ICON_SVG}</button>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="accordion type-accordion${isOpen ? ' open' : ''}" data-acc-key="${key}">
+        <div class="accordion-header" aria-expanded="${isOpen}" role="button" tabindex="0">
+          <span class="accordion-title">${group.group}</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="accordion-body">
+          <div class="type-cards-list">${cards}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const acc = header.closest('.accordion');
+      const open = acc.classList.toggle('open');
+      accordionStates[acc.dataset.accKey] = open;
+      header.setAttribute('aria-expanded', open);
+    });
+  });
+
+  container.querySelectorAll('.type-card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('.type-copy-btn')) return;
+      const id = card.dataset.pinId;
+      const token = id.replace('typo-', '');
+      const style = allStyles.find(s => s.token === token);
+      if (!style) return;
+      const lsStr = style.letterSpacing ? `${style.letterSpacing}px` : 'normal';
+      togglePin({
+        id,
+        type: 'type',
+        name: style.token,
+        token: style.token,
+        sample: style.sample,
+        fontName: style.fontName,
+        size: style.size,
+        weight: style.weight,
+        lineHeight: style.lineHeight,
+        letterSpacing: style.letterSpacing,
+        textTransform: style.textTransform,
+        cssVal: `font-size: ${style.size}px; font-weight: ${style.weight}; line-height: ${style.lineHeight}px; letter-spacing: ${lsStr};`
+      });
+    });
+  });
+
+  container.querySelectorAll('.type-copy-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = btn.closest('.type-card').dataset.pinId;
+      const token = id.replace('typo-', '');
+      const style = allStyles.find(s => s.token === token);
+      if (!style) return;
+      const lsStr = style.letterSpacing ? `${style.letterSpacing}px` : 'normal';
+      const ttLine = style.textTransform ? `\ntext-transform: ${style.textTransform};` : '';
+      const css = `/* --type-${style.token} */\nfont-family: '${style.fontName}', 'Inter', sans-serif;\nfont-size: ${style.size}px;\nfont-weight: ${style.weight};\nline-height: ${style.lineHeight}px;\nletter-spacing: ${lsStr};${ttLine}`;
+      copyText(css);
+      btn.classList.add('flashed');
+      setTimeout(() => btn.classList.remove('flashed'), 600);
+      showToast(`Copied CSS for ${style.token}`);
+    });
+  });
+}
+
+// ── RENDER CURRENT TAB ────────────────────────────────────────────────────────
+
+function renderCurrentTab() {
+  if (currentTab === 'colors') renderColors();
+  else if (currentTab === 'gradients') renderGradients();
+  else if (currentTab === 'typography') renderTypography();
+}
+
+function switchContent(fn) {
+  const el = $(`tab-${currentTab}`);
+  el.classList.add('fading');
+  setTimeout(() => { fn(); el.classList.remove('fading'); }, 120);
+}
+
+function syncPinPanelOffset() {
+  const bar = $('pin-bar');
+  if (bar.classList.contains('visible')) {
+    const h = bar.offsetHeight;
+    $('pin-panel').style.bottom = h + 'px';
+  }
+}
+
+// ── SCHEME/MODE CHANGE ────────────────────────────────────────────────────────
+
+function applySchemeColor() {
+  document.documentElement.style.setProperty('--scheme-primary', SCHEME_COLORS[currentScheme]);
+}
+
+// ── EVENT LISTENERS ───────────────────────────────────────────────────────────
+
+const TAB_META = {
+  colors:           { title: 'Colors',          subtitle: 'All the approved Netflix colors, organized by scheme and background.' },
+  gradients:        { title: 'Gradients',        subtitle: 'Ready-to-use color blends for backgrounds and visual moments.' },
+  typography:       { title: 'Typography',       subtitle: 'All Netflix text styles, from big headlines to small labels.' },
+  'getting-started':{ title: 'Getting Started',  subtitle: 'How to use this style sheet, no design background required.' },
+  faq:              { title: 'FAQ',              subtitle: 'Quick answers to common questions.' },
+};
+
+const INFO_TABS = new Set(['getting-started', 'faq']);
+
+const LIGHT_TABS = new Set(['getting-started', 'faq']);
+
+function applyTabMeta(tab) {
+  const meta = TAB_META[tab] || { title: tab, subtitle: '' };
+  document.getElementById('section-title').textContent = meta.title;
+  document.getElementById('section-subtitle').textContent = meta.subtitle;
+  document.title = `${meta.title} — Style Sheet`;
+  const isInfo = INFO_TABS.has(tab);
+  document.querySelector('.controls').classList.toggle('hidden', isInfo);
+  document.querySelector('.section-header').classList.toggle('hidden', tab === 'getting-started' || tab === 'faq');
+  document.getElementById('scheme-control').classList.toggle('disabled', !isInfo && tab === 'typography');
+  if (LIGHT_TABS.has(tab)) {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.body.classList.add('light-mode');
+    }));
+  } else {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.body.classList.toggle('light-mode', currentMode === 'light');
+    }));
+  }
+}
+
+function switchToTab(tab) {
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.querySelector(`.nav-tab[data-tab="${tab}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  currentTab = tab;
+  $(`tab-${currentTab}`).classList.add('active');
+  applyTabMeta(currentTab);
+  renderCurrentTab();
+}
+
+document.querySelectorAll('.nav-tab').forEach(btn => {
+  btn.addEventListener('click', () => switchToTab(btn.dataset.tab));
+});
+
+document.querySelector('.nav-logo').addEventListener('click', () => switchToTab('getting-started'));
+
+document.querySelectorAll('.pill-btn[data-mode]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pill-btn[data-mode]').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-checked', 'false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-checked', 'true');
+    currentMode = btn.dataset.mode;
+    document.body.classList.toggle('light-mode', currentMode === 'light');
+    closePinPanel();
+    updatePinBar();
+    switchContent(renderCurrentTab);
+  });
+});
+
+document.querySelectorAll('.scheme-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.scheme-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-checked', 'false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-checked', 'true');
+    currentScheme = btn.dataset.scheme;
+    applySchemeColor();
+    closePinPanel();
+    updatePinBar();
+    switchContent(renderCurrentTab);
+  });
+});
+
+$('pinChevronBtn').addEventListener('click', () => {
+  panelOpen = !panelOpen;
+  const panel = $('pin-panel');
+  const bar = $('pin-bar');
+  if (panelOpen) {
+    renderPinPanel();
+    panel.classList.add('visible');
+    bar.classList.add('pin-panel-open');
+    syncPinPanelOffset();
+  } else {
+    closePinPanel();
+  }
+});
+
+$('pinClearBtn').addEventListener('click', () => {
+  setPinned([]);
+  updatePinBar();
+  refreshPinnedStates();
+  closePinPanel();
+});
+
+$('pinCssBtn').addEventListener('click', copyPinnedCSS);
+$('pinExportBtn').addEventListener('click', exportPinnedMD);
+
+// Keyboard support for accordion headers (role="button")
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('accordion-header')) {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+
+// ── FEEDBACK ─────────────────────────────────────────────────────────────────
+
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV81EZCw8TIOTvcjPYfuWv_erTinEOVPkCFJm0buAkhsQQ0ET_zOuz2HS1gfWtI1pO/exec';
+
+const overlay = document.getElementById('feedback-overlay');
+const nameInput = document.getElementById('feedback-name');
+const textInput = document.getElementById('feedback-text');
+
+function openFeedback() {
+  overlay.classList.add('open');
+  (nameInput.value ? textInput : nameInput).focus();
+}
+
+function closeFeedback() {
+  overlay.classList.remove('open');
+}
+
+document.getElementById('review-fab').addEventListener('click', openFeedback);
+
+overlay.addEventListener('click', e => { if (e.target === overlay) closeFeedback(); });
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFeedback(); });
+
+document.getElementById('feedback-refresh').addEventListener('click', () => {
+  nameInput.value = '';
+  textInput.value = '';
+  nameInput.focus();
+  showToast('Form cleared');
+});
+
+document.getElementById('feedback-submit').addEventListener('click', () => {
+  const author = nameInput.value.trim() || 'Anonymous';
+  const text = textInput.value.trim();
+  if (!text) { textInput.focus(); return; }
+  const entry = { author, text, section: TAB_META[currentTab]?.title || currentTab, timestamp: new Date().toISOString() };
+  fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) }).catch(() => {});
+  textInput.value = '';
+  closeFeedback();
+  showToast('Feedback submitted. Thank you!');
+});
+
+// ── FAQ ACCORDIONS ────────────────────────────────────────────────────────────
+
+document.querySelectorAll('.faq-q').forEach(trigger => {
+  const item = trigger.closest('.faq-item');
+  const toggle = () => {
+    const isOpen = item.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', isOpen);
+  };
+  trigger.addEventListener('click', toggle);
+  trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+
+applySchemeColor();
+switchToTab('getting-started');
+window.addEventListener('resize', syncPinPanelOffset);
+</script>
+</body>
+</html>
