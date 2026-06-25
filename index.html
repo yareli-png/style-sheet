@@ -831,6 +831,7 @@ body.light-mode .type-card.pinned {
   border-top: 1px solid var(--card-border);
   flex-wrap: nowrap;
 }
+body.light-mode .type-sample-text { color: #111111; }
 body.light-mode .type-meta {
   background: #F2F2F2;
   border-top-color: #E8E8E8;
@@ -2748,7 +2749,7 @@ function renderColors() {
   semAcc.className = 'accordion' + (semOpen ? ' open' : '');
 
   const semSwatches = SEMANTIC_FG_TOKENS.map((token, i) => {
-    const hex = currentMode === 'dark' ? token.dark : token.light;
+    const hex = token.dark;
     const name = token.displayName;
     const role = token.uses;
     const id = `semantic-${i}`;
