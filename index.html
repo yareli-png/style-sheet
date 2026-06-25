@@ -1346,7 +1346,7 @@ body.light-mode .type-copy-btn:hover { background: rgba(0,0,0,0.18); color: #000
   flex-direction: row;
   align-items: center;
   gap: 18px;
-  padding: 18px 22px;
+  padding: 12px 22px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
@@ -1364,25 +1364,19 @@ body.light-mode .guide-step:hover {
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
-.guide-step:hover .guide-step-img {
-  border-color: rgba(229,9,20,0.4);
-  transition: border-color 0.2s ease;
-}
-
 .guide-step-img {
-  flex: 1;
-  min-height: 120px;
-  background: var(--card-bg);
-  border: 1px dashed var(--section-border);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: border-color 0.2s ease;
+  flex: 0 0 auto;
+  width: 210px;
+  height: 135px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .guide-step-img-src {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -1631,18 +1625,18 @@ body.light-mode .guide-step:hover {
   margin-top: 16px;
   border-radius: 12px;
   padding: 18px 22px;
-  background: linear-gradient(135deg, #E1E5F5, #A9B9FA);
+  background: radial-gradient(circle at 30% 50%, #E1E5F5, #A9B9FA);
+  border: 1px solid rgba(255,255,255,0.5);
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 18px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
   cursor: default;
 }
 
 .guide-beta-note:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(64,97,231,0.15);
 }
 
 body.light-mode .guide-beta-note {
@@ -1650,17 +1644,15 @@ body.light-mode .guide-beta-note {
 }
 
 .guide-beta-image {
-  flex: 1;
-  align-self: stretch;
-  min-height: 80px;
-  background: rgba(64,97,231,0.12);
-  border-radius: 8px;
+  flex: 0 0 auto;
+  width: 180px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-body.light-mode .guide-beta-image { background: rgba(64,97,231,0.12); }
+body.light-mode .guide-beta-image { }
 
 .guide-beta-text { flex: 3; display: flex; flex-direction: column; gap: 6px; }
 
@@ -1885,11 +1877,11 @@ body.light-mode .guide-beta-body { color: #233371; }
         </div>
         <div class="guide-beta-note">
           <div class="guide-beta-image">
-            <img src="assets/banner-still-growing.svg" alt="Still growing" class="guide-step-img-src"/>
+            <img src="assets/banner-still-growing.svg" alt="Still growing" style="width:100%;height:100%;object-fit:contain;display:block;"/>
           </div>
           <div class="guide-beta-text">
             <div class="guide-beta-title">Still growing</div>
-            <div class="guide-beta-body">Things will change and improve as feedback comes in. A direct integration with <strong>Claude Cowork</strong> is also in the works.</div>
+            <div class="guide-beta-body">This tool is built to grow with your <strong>feedback</strong>, with a <strong>Claude Cowork</strong> integration coming soon!</div>
           </div>
         </div>
       </div>
@@ -3210,6 +3202,28 @@ document.querySelectorAll('.faq-q').forEach(trigger => {
 applySchemeColor();
 switchToTab('getting-started');
 window.addEventListener('resize', syncPinPanelOffset);
+
+// ── BANNER CURSOR GRADIENT ────────────────────────────────────────────────────
+const betaBanner = document.querySelector('.guide-beta-note');
+if (betaBanner) {
+  let targetX = 30, targetY = 50, currentX = 30, currentY = 50;
+  let rafId;
+  betaBanner.addEventListener('mousemove', (e) => {
+    const rect = betaBanner.getBoundingClientRect();
+    targetX = (e.clientX - rect.left) / rect.width * 100;
+    targetY = (e.clientY - rect.top) / rect.height * 100;
+  });
+  betaBanner.addEventListener('mouseleave', () => {
+    targetX = 30; targetY = 50;
+  });
+  function animateBanner() {
+    currentX += (targetX - currentX) * 0.05;
+    currentY += (targetY - currentY) * 0.05;
+    betaBanner.style.background = `radial-gradient(circle at ${currentX.toFixed(1)}% ${currentY.toFixed(1)}%, #E1E5F5, #A9B9FA)`;
+    rafId = requestAnimationFrame(animateBanner);
+  }
+  animateBanner();
+}
 </script>
 </body>
 </html>
