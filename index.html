@@ -1287,6 +1287,71 @@ body.light-mode .type-copy-btn:hover { background: rgba(0,0,0,0.18); color: #000
   color: var(--text-secondary);
 }
 
+.guide-use-cases {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 20px;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.guide-use-case {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.guide-use-case:last-child { border-bottom: none; }
+
+.guide-use-case-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: rgba(64, 97, 231, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  transition: transform 0.2s ease;
+}
+
+.guide-use-case-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #4061E7;
+}
+
+.guide-use-case:hover .guide-use-case-icon {
+  transform: scale(1.05);
+}
+
+.guide-use-case-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.guide-use-case-title {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--text-primary);
+}
+
+.guide-use-case-body {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-secondary);
+}
+
 .guide-steps {
   display: flex;
   flex-direction: column;
@@ -1831,6 +1896,34 @@ body.light-mode .guide-beta-body { color: #233371; }
           <span class="guide-hero-label">Style Sheet</span>
           <h1 class="guide-hero-title">Getting Started</h1>
           <p class="guide-hero-sub">This is a Netflix's design style reference, readable by both humans and AI tools. No design background needed: pick what you need, copy it, and use it directly in your prompts.</p>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <div class="guide-eyebrow">Use cases</div>
+        <h2 class="guide-heading">A few ways to use it</h2>
+        <div class="guide-use-cases">
+          <div class="guide-use-case">
+            <div class="guide-use-case-icon"><img src="assets/icon-usecase-images.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-content">
+              <div class="guide-use-case-title">Generating on-brand images</div>
+              <div class="guide-use-case-body">Pick your colors, export the .md file, and attach it to your image prompt. The AI uses the right palette automatically.</div>
+            </div>
+          </div>
+          <div class="guide-use-case">
+            <div class="guide-use-case-icon"><img src="assets/icon-usecase-deck.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-content">
+              <div class="guide-use-case-title">Building a slide deck</div>
+              <div class="guide-use-case-body">Pin your styles and paste them into any AI prompt. It applies the right colors and fonts from the start. Less back-and-forth, faster results.</div>
+            </div>
+          </div>
+          <div class="guide-use-case">
+            <div class="guide-use-case-icon"><img src="assets/icon-usecase-reports.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-content">
+              <div class="guide-use-case-title">Building reports and dashboards</div>
+              <div class="guide-use-case-body">Copy any value and paste it into your prompt instead of describing styles manually. Your output stays consistent every time.</div>
+            </div>
+          </div>
         </div>
       </div>
 
