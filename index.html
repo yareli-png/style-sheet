@@ -1842,6 +1842,8 @@ body.light-mode .guide-beta-body { color: #233371; }
       <button class="nav-tab active" data-tab="colors">Colors</button>
       <button class="nav-tab" data-tab="gradients">Gradients</button>
       <button class="nav-tab" data-tab="typography">Typography</button>
+      <button class="nav-tab" data-tab="images">Images</button>
+      <button class="nav-tab" data-tab="templates">Templates</button>
       <button class="nav-tab" data-tab="faq">FAQ</button>
     </div>
   </div>
@@ -1888,6 +1890,32 @@ body.light-mode .guide-beta-body { color: #233371; }
 
   <div class="tab-content fade-target" id="tab-typography" data-review-section="Typography"></div>
 
+  <div class="tab-content" id="tab-images" data-review-section="Images">
+    <div class="guide-page">
+      <div class="guide-section">
+        <div class="guide-hero">
+          <span class="guide-hero-label">Style Sheet</span>
+          <h1 class="guide-hero-title">Images</h1>
+          <p class="guide-hero-sub">Netflix imagery library and visual references.</p>
+          <p class="guide-hero-sub">Coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-templates" data-review-section="Templates">
+    <div class="guide-page">
+      <div class="guide-section">
+        <div class="guide-hero">
+          <span class="guide-hero-label">Style Sheet</span>
+          <h1 class="guide-hero-title">Templates</h1>
+          <p class="guide-hero-sub">AI-optimized templates for high-frequency use cases.</p>
+          <p class="guide-hero-sub">Coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="tab-content" id="tab-getting-started" data-review-section="Getting Started">
     <div class="guide-page">
 
@@ -1920,7 +1948,7 @@ body.light-mode .guide-beta-body { color: #233371; }
           <div class="guide-use-case">
             <div class="guide-use-case-icon"><img src="assets/icon-usecase-reports.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
             <div class="guide-use-case-content">
-              <div class="guide-use-case-title">Building reports and dashboards</div>
+              <div class="guide-use-case-title">Creating reports and dashboards</div>
               <div class="guide-use-case-body">Copy any value and paste it into your prompt instead of describing styles manually. Your output stays consistent every time.</div>
             </div>
           </div>
@@ -2099,6 +2127,7 @@ body.light-mode .guide-beta-body { color: #233371; }
       </div>
     </div>
   </div>
+
 
 </main>
 
@@ -3147,11 +3176,13 @@ const TAB_META = {
   typography:       { title: 'Typography',       subtitle: 'All Netflix text styles, from big headlines to small labels.' },
   'getting-started':{ title: 'Getting Started',  subtitle: 'How to use this style sheet, no design background required.' },
   faq:              { title: 'FAQ',              subtitle: 'Quick answers to common questions.' },
+  images:           { title: 'Images',           subtitle: 'Netflix imagery library and visual references.' },
+  templates:        { title: 'Templates',        subtitle: 'AI-optimized templates for high-frequency use cases.' },
 };
 
-const INFO_TABS = new Set(['getting-started', 'faq']);
+const INFO_TABS = new Set(['getting-started', 'faq', 'images', 'templates']);
 
-const LIGHT_TABS = new Set(['getting-started', 'faq']);
+const LIGHT_TABS = new Set(['getting-started', 'faq', 'images', 'templates']);
 
 function applyTabMeta(tab) {
   const meta = TAB_META[tab] || { title: tab, subtitle: '' };
@@ -3160,7 +3191,7 @@ function applyTabMeta(tab) {
   document.title = `${meta.title} — Style Sheet`;
   const isInfo = INFO_TABS.has(tab);
   document.querySelector('.controls').classList.toggle('hidden', isInfo);
-  document.querySelector('.section-header').classList.toggle('hidden', tab === 'getting-started' || tab === 'faq');
+  document.querySelector('.section-header').classList.toggle('hidden', INFO_TABS.has(tab));
   document.getElementById('scheme-control').classList.toggle('disabled', !isInfo && tab === 'typography');
   if (LIGHT_TABS.has(tab)) {
     requestAnimationFrame(() => requestAnimationFrame(() => {
