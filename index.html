@@ -1641,6 +1641,155 @@ body.light-mode .guide-step:hover {
   margin-top: -6px;
 }
 
+/* ── RESOURCES / TEMPLATE CARDS ─────────────────────────────────────── */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.template-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.template-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.16);
+}
+
+body.light-mode .template-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.14);
+}
+
+.template-card-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #2D1B8E, #4061E7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.template-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.template-card-info {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.template-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--card-border);
+}
+
+.template-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1;
+}
+
+.template-card-title {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.template-card-date {
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.template-card-status {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.template-card-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.template-card-status[data-status="testing"]     { color: #D97706; }
+.template-card-status[data-status="testing"]::before  { background: #D97706; }
+.template-card-status[data-status="live"]        { color: #16A34A; }
+.template-card-status[data-status="live"]::before     { background: #16A34A; }
+.template-card-status[data-status="coming-soon"] { color: var(--text-muted); }
+.template-card-status[data-status="coming-soon"]::before { background: var(--text-muted); }
+
+.template-card-tag {
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 100px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.template-card-tag[data-tag="cowork-skill"]  { color: #4061E7; background: rgba(64, 97, 231, 0.12); }
+.template-card-tag[data-tag="figma-file"]    { color: #9747FF; background: rgba(151, 71, 255, 0.12); }
+.template-card-tag[data-tag="how-to"]        { color: #0D9488; background: rgba(13, 148, 136, 0.12); }
+.template-card-tag[data-tag="prompt"]        { color: #D97706; background: rgba(217, 119, 6, 0.12); }
+.template-card-tag[data-tag="guide"]         { color: #6366F1; background: rgba(99, 102, 241, 0.12); }
+.template-card-tag[data-tag="checklist"]     { color: #16A34A; background: rgba(22, 163, 74, 0.12); }
+.template-card-tag[data-tag="tutorial"]      { color: #E11D48; background: rgba(225, 29, 72, 0.12); }
+.template-card-tag[data-tag="reference"]     { color: #64748B; background: rgba(100, 116, 139, 0.12); }
+
+.template-card-link {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(64, 97, 231, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.template-card:hover .template-card-link {
+  background: rgba(64, 97, 231, 0.22);
+}
+
 .guide-step-footnote {
   font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
   font-size: 13px;
@@ -1842,8 +1991,7 @@ body.light-mode .guide-beta-body { color: #233371; }
       <button class="nav-tab active" data-tab="colors">Colors</button>
       <button class="nav-tab" data-tab="gradients">Gradients</button>
       <button class="nav-tab" data-tab="typography">Typography</button>
-      <button class="nav-tab" data-tab="images">Images</button>
-      <button class="nav-tab" data-tab="templates">Templates</button>
+      <button class="nav-tab" data-tab="templates">Resources</button>
       <button class="nav-tab" data-tab="faq">FAQ</button>
     </div>
   </div>
@@ -1890,29 +2038,43 @@ body.light-mode .guide-beta-body { color: #233371; }
 
   <div class="tab-content fade-target" id="tab-typography" data-review-section="Typography"></div>
 
-  <div class="tab-content" id="tab-images" data-review-section="Images">
+  <div class="tab-content" id="tab-templates" data-review-section="Resources">
     <div class="guide-page">
-      <div class="guide-section">
-        <div class="guide-hero">
-          <span class="guide-hero-label">Style Sheet</span>
-          <h1 class="guide-hero-title">Images</h1>
-          <p class="guide-hero-sub">Netflix imagery library and visual references.</p>
-          <p class="guide-hero-sub">Coming soon.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="tab-content" id="tab-templates" data-review-section="Templates">
-    <div class="guide-page">
       <div class="guide-section">
         <div class="guide-hero">
           <span class="guide-hero-label">Style Sheet</span>
-          <h1 class="guide-hero-title">Templates</h1>
-          <p class="guide-hero-sub">AI-optimized templates for high-frequency use cases.</p>
-          <p class="guide-hero-sub">Coming soon.</p>
+          <h1 class="guide-hero-title">Resources</h1>
+          <p class="guide-hero-sub">AI-optimized resources for high-frequency use cases.</p>
         </div>
       </div>
+
+      <div class="guide-section">
+        <div class="template-grid">
+          <a class="template-card" href="https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22?present=1" target="_blank" rel="noopener">
+            <div class="template-card-thumb">
+              <img src="assets/thumb-slides-from-doc.svg" alt="Slides from Doc preview"/>
+            </div>
+            <div class="template-card-info">
+              <div class="template-card-title">Slides from Doc Cowork Skill</div>
+              <div class="template-card-date">Updated Jul 17, 2026</div>
+              <div class="template-card-status" data-status="testing">Status: Testing</div>
+            </div>
+            <div class="template-card-footer">
+              <div class="template-card-tags">
+                <span class="template-card-tag" data-tag="cowork-skill">Cowork Skill</span>
+                <span class="template-card-tag" data-tag="how-to">How to</span>
+              </div>
+              <div class="template-card-link">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 12L12 2M12 2H6M12 2V8" stroke="#4061E7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -3176,13 +3338,12 @@ const TAB_META = {
   typography:       { title: 'Typography',       subtitle: 'All Netflix text styles, from big headlines to small labels.' },
   'getting-started':{ title: 'Getting Started',  subtitle: 'How to use this style sheet, no design background required.' },
   faq:              { title: 'FAQ',              subtitle: 'Quick answers to common questions.' },
-  images:           { title: 'Images',           subtitle: 'Netflix imagery library and visual references.' },
-  templates:        { title: 'Templates',        subtitle: 'AI-optimized templates for high-frequency use cases.' },
+  templates:        { title: 'Resources',        subtitle: 'AI-optimized resources for high-frequency use cases.' },
 };
 
-const INFO_TABS = new Set(['getting-started', 'faq', 'images', 'templates']);
+const INFO_TABS = new Set(['getting-started', 'faq', 'templates']);
 
-const LIGHT_TABS = new Set(['getting-started', 'faq', 'images', 'templates']);
+const LIGHT_TABS = new Set(['getting-started', 'faq', 'templates']);
 
 function applyTabMeta(tab) {
   const meta = TAB_META[tab] || { title: tab, subtitle: '' };
