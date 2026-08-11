@@ -508,13 +508,16 @@ body.light-mode .resource-modal-embed-frame {
   border: none;
 }
 .resource-modal-embed-frame--video {
-  aspect-ratio: unset;
+  aspect-ratio: 16/9;
   background: #000;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .resource-modal-video {
   width: 100%;
+  height: 100%;
   display: block;
-  border-radius: 9px;
+  object-fit: contain;
 }
 .resource-modal-embed-placeholder {
   display: flex;
@@ -2643,11 +2646,15 @@ body.light-mode .guide-beta-body { color: #233371; }
         </a>
       </div>
 
-      <!-- 5. Demo (video) -->
+      <!-- 5. Demo (video or placeholder) -->
       <div class="resource-modal-embed-block" id="resource-modal-demo">
         <div class="resource-modal-embed-label">Demo</div>
         <div class="resource-modal-embed-frame resource-modal-embed-frame--video">
-          <video class="resource-modal-video" src="assets/slide-deck-demo.mp4" controls playsinline preload="metadata"></video>
+          <video class="resource-modal-video" controls playsinline preload="metadata" style="display:none"></video>
+          <div class="resource-modal-embed-placeholder" id="resource-modal-video-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M13 11l9 5-9 5V11z" fill="currentColor" opacity="0.5"/></svg>
+            Video coming soon
+          </div>
         </div>
       </div>
 
@@ -3782,6 +3789,7 @@ const RESOURCE_DATA = {
     learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22',
     learnLabel: 'Slide Deck Builder',
     learnThumb: 'assets/thumb-slides-from-doc.svg',
+    demoVideo: 'assets/slide-deck-demo.mp4',
   },
   'mailings': {
     title: 'Mailings',
@@ -3792,6 +3800,7 @@ const RESOURCE_DATA = {
     learnHref: '#',
     learnLabel: 'Mailings',
     learnThumb: 'assets/thumb-mailings.svg',
+    demoVideo: null,
   },
 };
 
@@ -3809,11 +3818,24 @@ function openResourceModal(key) {
   linkCard.href = data.learnHref;
   linkCard.querySelector('.resource-modal-link-card-thumb img').src = data.learnThumb;
   linkCard.querySelector('.resource-modal-link-card-label').textContent = data.learnLabel;
+  const video = m.querySelector('.resource-modal-video');
+  const placeholder = document.getElementById('resource-modal-video-placeholder');
+  if (data.demoVideo) {
+    video.src = data.demoVideo;
+    video.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    video.src = '';
+    video.style.display = 'none';
+    placeholder.style.display = 'flex';
+  }
   resourceOverlay.classList.add('open');
 }
 
 function closeResourceModal() {
   resourceOverlay.classList.remove('open');
+  const video = resourceOverlay.querySelector('.resource-modal-video');
+  if (video) { video.pause(); }
 }
 
 document.querySelectorAll('.template-card[data-modal]').forEach(card => {
