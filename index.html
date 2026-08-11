@@ -302,6 +302,223 @@ main {
   transform: scale(1) translateY(0);
   opacity: 1;
 }
+
+/* ── RESOURCE MODAL ─────────────────────────────────────────────────────── */
+.resource-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.resource-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.resource-modal {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
+  opacity: 0;
+}
+.resource-overlay.open .resource-modal {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+.resource-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px 16px 0;
+}
+.resource-modal-title {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.resource-modal-updated {
+  font-family: 'Netflix Sans Regular','Inter',sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.resource-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(128,128,128,0.12);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+.resource-modal-close:hover { background: rgba(128,128,128,0.22); }
+.resource-modal-body {
+  padding: 12px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.resource-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.resource-modal-desc {
+  font-family: 'Netflix Sans Regular','Inter',sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.resource-modal-cta-section {
+  display: flex;
+  padding: 4px 0;
+}
+.resource-modal-link-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.resource-modal-link-card:hover {
+  border-color: rgba(64,97,231,0.4);
+  background: rgba(64,97,231,0.04);
+}
+.resource-modal-link-card-thumb {
+  width: 60px;
+  height: 34px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.resource-modal-link-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.resource-modal-link-card-label {
+  font-family: 'Netflix Sans Medium','Inter',sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  flex: 1;
+}
+.resource-modal-link-card svg {
+  color: #4061E7;
+  flex-shrink: 0;
+}
+.resource-modal-cta {
+  font-family: 'Netflix Sans Medium','Inter',sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #4061E7;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+}
+.resource-modal-cta:hover { background: #5B79F1; }
+.resource-modal-embeds {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.resource-modal-embed-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.resource-modal-embed-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.resource-modal-embed-label {
+  font-family: 'Netflix Sans Medium','Inter',sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.resource-modal-embed-external {
+  font-family: 'Netflix Sans Regular','Inter',sans-serif;
+  font-size: 12px;
+  color: #4061E7;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.15s ease;
+}
+.resource-modal-embed-external:hover { opacity: 0.75; }
+.resource-modal-embed-frame {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: rgba(0,0,0,0.12);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+body.light-mode .resource-modal-embed-frame {
+  background: rgba(0,0,0,0.04);
+}
+.resource-modal-embed-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.resource-modal-embed-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-family: 'Netflix Sans Regular','Inter',sans-serif;
+  font-size: 13px;
+  text-align: center;
+  padding: 16px;
+}
+
 /* foreground light: rgba(0,0,0,0.90) */
 .feedback-modal-header {
   display: flex;
@@ -1753,8 +1970,11 @@ body.light-mode .template-card:hover {
 .template-card-status[data-status="testing"]::before  { background: #D97706; }
 .template-card-status[data-status="live"]        { color: #16A34A; }
 .template-card-status[data-status="live"]::before     { background: #16A34A; }
+.template-card-status[data-status="released"]    { color: #16A34A; }
+.template-card-status[data-status="released"]::before  { background: #16A34A; }
 .template-card-status[data-status="coming-soon"] { color: var(--text-muted); }
 .template-card-status[data-status="coming-soon"]::before { background: var(--text-muted); }
+.template-card-thumb--inactive { filter: grayscale(1); opacity: 0.5; }
 
 .template-card-tag {
   font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
@@ -2051,14 +2271,14 @@ body.light-mode .guide-beta-body { color: #233371; }
 
       <div class="guide-section">
         <div class="template-grid">
-          <a class="template-card" href="https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22?present=1" target="_blank" rel="noopener">
+          <div class="template-card" data-modal="slides-from-doc" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="template-card-thumb">
-              <img src="assets/thumb-slides-from-doc.svg" alt="Slides from Doc preview"/>
+              <img src="assets/thumb-slides-from-doc.svg" alt="Slide Deck Builder preview"/>
             </div>
             <div class="template-card-info">
-              <div class="template-card-title">Slides from Doc Cowork Skill</div>
+              <div class="template-card-title">Slide Deck Builder</div>
               <div class="template-card-date">Updated Jul 17, 2026</div>
-              <div class="template-card-status" data-status="testing">Status: Testing</div>
+              <div class="template-card-status" data-status="released">Status: Released</div>
             </div>
             <div class="template-card-footer">
               <div class="template-card-tags">
@@ -2067,11 +2287,33 @@ body.light-mode .guide-beta-body { color: #233371; }
               </div>
               <div class="template-card-link">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 12L12 2M12 2H6M12 2V8" stroke="#4061E7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M7 2H3a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V7M10 2h2m0 0v2m0-2L6 8" stroke="#4061E7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
             </div>
-          </a>
+          </div>
+
+          <div class="template-card" data-modal="mailings" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="template-card-thumb template-card-thumb--inactive">
+              <img src="assets/thumb-mailings.svg" alt="Mailings preview"/>
+            </div>
+            <div class="template-card-info">
+              <div class="template-card-title">Mailings</div>
+              <div class="template-card-date">Coming soon</div>
+              <div class="template-card-status" data-status="coming-soon">Status: Coming Soon</div>
+            </div>
+            <div class="template-card-footer">
+              <div class="template-card-tags">
+                <span class="template-card-tag" data-tag="template">Template</span>
+                <span class="template-card-tag" data-tag="guide">Guide</span>
+              </div>
+              <div class="template-card-link">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 2H3a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V7M10 2h2m0 0v2m0-2L6 8" stroke="#4061E7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2345,6 +2587,64 @@ body.light-mode .guide-beta-body { color: #233371; }
     <div class="feedback-actions">
       <button class="feedback-refresh-btn" id="feedback-refresh">Refresh</button>
       <button class="feedback-submit-btn" id="feedback-submit">Submit</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── RESOURCE MODAL ──────────────────────────────────────────────────────── -->
+<div class="resource-overlay" id="resource-overlay">
+  <div class="resource-modal" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title">
+    <div class="resource-modal-header">
+      <button class="resource-modal-close" id="resource-modal-close" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="resource-modal-body">
+
+      <!-- 1. Title -->
+      <div class="resource-modal-title" id="resource-modal-title">Slide Deck Builder</div>
+
+      <!-- 2. Last updated + tags -->
+      <div class="resource-modal-updated">Updated Jul 17, 2026</div>
+      <div class="resource-modal-tags">
+        <span class="template-card-tag" data-tag="cowork-skill">Cowork Skill</span>
+        <span class="template-card-tag" data-tag="how-to">How to</span>
+      </div>
+
+      <!-- 3. Description -->
+      <p class="resource-modal-desc">Turn a Google Doc into a Netflix-branded slide deck in minutes. Connect your doc, pick a template, and the skill builds the slides for you. No manual copying or formatting needed.</p>
+
+      <!-- 4. Run the skill CTA (centered, full-width) -->
+      <div class="resource-modal-cta-section">
+        <a class="resource-modal-cta" href="https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22?present=1" target="_blank" rel="noopener">
+          Run the skill
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5.5M10 2V6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- 4. Learn how to use it (linked, not embedded) -->
+      <div class="resource-modal-embed-block">
+        <div class="resource-modal-embed-label">Learn how to use it</div>
+        <a class="resource-modal-link-card" href="https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22" target="_blank" rel="noopener">
+          <div class="resource-modal-link-card-thumb">
+            <img src="assets/thumb-slides-from-doc.svg" alt="" aria-hidden="true"/>
+          </div>
+          <div class="resource-modal-link-card-label">Slide Deck Builder</div>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- 5. Demo (video placeholder) -->
+      <div class="resource-modal-embed-block">
+        <div class="resource-modal-embed-label">Demo</div>
+        <div class="resource-modal-embed-frame">
+          <div class="resource-modal-embed-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M13 11l9 5-9 5V11z" fill="currentColor" opacity="0.5"/></svg>
+            Video coming soon
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -3461,7 +3761,62 @@ document.getElementById('review-fab').addEventListener('click', openFeedback);
 
 overlay.addEventListener('click', e => { if (e.target === overlay) closeFeedback(); });
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFeedback(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFeedback(); closeResourceModal(); } });
+
+// ── RESOURCE MODAL ────────────────────────────────────────────────────────────
+const resourceOverlay = document.getElementById('resource-overlay');
+
+const RESOURCE_DATA = {
+  'slides-from-doc': {
+    title: 'Slide Deck Builder',
+    updated: 'Updated Jul 17, 2026',
+    tags: [{ tag: 'cowork-skill', label: 'Cowork Skill' }, { tag: 'how-to', label: 'How to' }],
+    desc: 'Turn a Google Doc into a Netflix-branded slide deck in minutes. Connect your doc, pick a template, and the skill builds the slides for you. No manual copying or formatting needed.',
+    ctaHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22?present=1',
+    learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22',
+    learnLabel: 'Slide Deck Builder',
+    learnThumb: 'assets/thumb-slides-from-doc.svg',
+  },
+  'mailings': {
+    title: 'Mailings',
+    updated: 'Coming soon',
+    tags: [{ tag: 'template', label: 'Template' }, { tag: 'guide', label: 'Guide' }],
+    desc: 'Placeholder description. More details about the Mailings resource coming soon.',
+    ctaHref: '#',
+    learnHref: '#',
+    learnLabel: 'Mailings',
+    learnThumb: 'assets/thumb-mailings.svg',
+  },
+};
+
+function openResourceModal(key) {
+  const data = RESOURCE_DATA[key];
+  if (!data) return;
+  const m = resourceOverlay.querySelector('.resource-modal');
+  m.querySelector('.resource-modal-title').textContent = data.title;
+  m.querySelector('.resource-modal-updated').textContent = data.updated;
+  m.querySelector('.resource-modal-tags').innerHTML = data.tags.map(t =>
+    `<span class="template-card-tag" data-tag="${t.tag}">${t.label}</span>`).join('');
+  m.querySelector('.resource-modal-desc').textContent = data.desc;
+  m.querySelector('.resource-modal-cta').href = data.ctaHref;
+  const linkCard = m.querySelector('.resource-modal-link-card');
+  linkCard.href = data.learnHref;
+  linkCard.querySelector('.resource-modal-link-card-thumb img').src = data.learnThumb;
+  linkCard.querySelector('.resource-modal-link-card-label').textContent = data.learnLabel;
+  resourceOverlay.classList.add('open');
+}
+
+function closeResourceModal() {
+  resourceOverlay.classList.remove('open');
+}
+
+document.querySelectorAll('.template-card[data-modal]').forEach(card => {
+  card.addEventListener('click', () => openResourceModal(card.dataset.modal));
+  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openResourceModal(card.dataset.modal); } });
+});
+
+document.getElementById('resource-modal-close').addEventListener('click', closeResourceModal);
+resourceOverlay.addEventListener('click', e => { if (e.target === resourceOverlay) closeResourceModal(); });
 
 document.getElementById('feedback-refresh').addEventListener('click', () => {
   nameInput.value = '';
