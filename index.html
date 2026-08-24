@@ -434,6 +434,37 @@ main {
   color: #4061E7;
   flex-shrink: 0;
 }
+.resource-modal-example-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.resource-modal-example-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.resource-modal-example-link:hover {
+  border-color: rgba(64,97,231,0.4);
+  background: rgba(64,97,231,0.04);
+}
+.resource-modal-example-link-label {
+  font-family: 'Netflix Sans Medium','Inter',sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  flex: 1;
+}
+.resource-modal-example-link svg {
+  color: #4061E7;
+  flex-shrink: 0;
+}
 .resource-modal-cta {
   font-family: 'Netflix Sans Medium','Inter',sans-serif;
   font-size: 14px;
@@ -1986,6 +2017,8 @@ body.light-mode .template-card:hover {
 .template-card-status[data-status="released"]::before  { background: #16A34A; }
 .template-card-status[data-status="coming-soon"] { color: var(--text-muted); }
 .template-card-status[data-status="coming-soon"]::before { background: var(--text-muted); }
+.template-card-status[data-status="in-progress"] { color: #D97706; }
+.template-card-status[data-status="in-progress"]::before { background: #D97706; }
 .template-card-thumb--inactive { filter: grayscale(1); opacity: 0.5; }
 
 .template-card-tag {
@@ -2306,11 +2339,55 @@ body.light-mode .guide-beta-body { color: #233371; }
           </div>
 
           <div class="template-card" data-modal="mailings" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="template-card-thumb template-card-thumb--inactive">
-              <img src="assets/thumb-mailings.svg" alt="Mailings preview"/>
+            <div class="template-card-thumb">
+              <img src="assets/thumb-mailings.svg" alt="Emails preview"/>
             </div>
             <div class="template-card-info">
-              <div class="template-card-title">Mailings</div>
+              <div class="template-card-title">Emails</div>
+              <div class="template-card-date">Updated Aug 21, 2026</div>
+              <div class="template-card-status" data-status="released">Status: Released</div>
+            </div>
+            <div class="template-card-footer">
+              <div class="template-card-tags">
+                <span class="template-card-tag" data-tag="cowork-skill">Cowork Skill</span>
+                <span class="template-card-tag" data-tag="how-to">How to</span>
+              </div>
+              <div class="template-card-link">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 2H3a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V7M10 2h2m0 0v2m0-2L6 8" stroke="#4061E7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-modal="localization-workflow" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="template-card-thumb template-card-thumb--inactive">
+              <img src="assets/thumb-localization.svg" alt="Localization Workflow preview"/>
+            </div>
+            <div class="template-card-info">
+              <div class="template-card-title">Localization Workflow</div>
+              <div class="template-card-date">In progress</div>
+              <div class="template-card-status" data-status="in-progress">Status: In Progress</div>
+            </div>
+            <div class="template-card-footer">
+              <div class="template-card-tags">
+                <span class="template-card-tag" data-tag="template">Template</span>
+                <span class="template-card-tag" data-tag="guide">Guide</span>
+              </div>
+              <div class="template-card-link">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 2H3a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V7M10 2h2m0 0v2m0-2L6 8" stroke="#4061E7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-modal="image-generator" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="template-card-thumb template-card-thumb--inactive">
+              <img src="assets/thumb-image-generator.svg" alt="Image Generator preview"/>
+            </div>
+            <div class="template-card-info">
+              <div class="template-card-title">Image Generator</div>
               <div class="template-card-date">Coming soon</div>
               <div class="template-card-status" data-status="coming-soon">Status: Coming Soon</div>
             </div>
@@ -2656,6 +2733,12 @@ body.light-mode .guide-beta-body { color: #233371; }
             Video coming soon
           </div>
         </div>
+      </div>
+
+      <!-- 6. Output Examples -->
+      <div class="resource-modal-embed-block" id="resource-modal-examples">
+        <div class="resource-modal-embed-label">Output Examples</div>
+        <div class="resource-modal-example-list" id="resource-modal-example-list"></div>
       </div>
 
     </div>
@@ -3790,16 +3873,48 @@ const RESOURCE_DATA = {
     learnLabel: 'Slide Deck Builder',
     learnThumb: 'assets/thumb-slides-from-doc.svg',
     demoVideo: 'assets/slide-deck-demo.mp4',
+    outputExamples: [
+      { label: 'Example 1', href: '#' },
+      { label: 'Example 2', href: '#' },
+      { label: 'Example 3', href: '#' },
+    ],
   },
   'mailings': {
-    title: 'Mailings',
-    updated: 'Coming soon',
+    title: 'Emails',
+    updated: 'Updated Aug 21, 2026',
+    tags: [{ tag: 'cowork-skill', label: 'Cowork Skill' }, { tag: 'how-to', label: 'How to' }],
+    desc: 'Turns a Google Doc into a ready-to-send CS email. Paste the doc link, pick a color scheme, and the skill auto-detects the type and builds the email for you.',
+    ctaHref: 'https://claude.ai/customize/skills?selectedId=skill_013brPZpoEJVmG5vX6iy1rsf',
+    learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/edf754a9-7b5d-407e-89be-df8c5749b444',
+    learnLabel: 'Emails',
+    learnThumb: 'assets/thumb-mailings.svg',
+    demoVideo: 'assets/email-demo.mp4',
+    outputExamples: [
+      { label: 'Example 1', href: '#' },
+      { label: 'Example 2', href: '#' },
+      { label: 'Example 3', href: '#' },
+    ],
+  },
+  'localization-workflow': {
+    title: 'Localization Workflow',
+    updated: 'In progress',
     tags: [{ tag: 'template', label: 'Template' }, { tag: 'guide', label: 'Guide' }],
-    desc: 'Placeholder description. More details about the Mailings resource coming soon.',
+    desc: 'Placeholder description. More details about the Localization Workflow resource coming soon.',
     ctaHref: '#',
     learnHref: '#',
-    learnLabel: 'Mailings',
-    learnThumb: 'assets/thumb-mailings.svg',
+    learnLabel: 'Localization Workflow',
+    learnThumb: 'assets/thumb-localization.svg',
+    demoVideo: null,
+  },
+  'image-generator': {
+    title: 'Image Generator',
+    updated: 'Coming soon',
+    tags: [{ tag: 'template', label: 'Template' }, { tag: 'guide', label: 'Guide' }],
+    desc: 'Placeholder description. More details about the Image Generator resource coming soon.',
+    ctaHref: '#',
+    learnHref: '#',
+    learnLabel: 'Image Generator',
+    learnThumb: 'assets/thumb-image-generator.svg',
     demoVideo: null,
   },
 };
@@ -3822,12 +3937,27 @@ function openResourceModal(key) {
   const placeholder = document.getElementById('resource-modal-video-placeholder');
   if (data.demoVideo) {
     video.src = data.demoVideo;
+    video.playbackRate = 1.5;
     video.style.display = 'block';
     placeholder.style.display = 'none';
   } else {
     video.src = '';
     video.style.display = 'none';
     placeholder.style.display = 'flex';
+  }
+  const examplesBlock = document.getElementById('resource-modal-examples');
+  const examplesList = document.getElementById('resource-modal-example-list');
+  if (data.outputExamples && data.outputExamples.length) {
+    examplesList.innerHTML = data.outputExamples.map(ex => `
+      <a class="resource-modal-example-link" href="${ex.href}" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 1.5h4l3 3v7a1 1 0 01-1 1H4a1 1 0 01-1-1v-9a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 1.5V4.5H11" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <div class="resource-modal-example-link-label">${ex.label}</div>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5.5M10 2V6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>`).join('');
+    examplesBlock.style.display = '';
+  } else {
+    examplesList.innerHTML = '';
+    examplesBlock.style.display = 'none';
   }
   resourceOverlay.classList.add('open');
 }
