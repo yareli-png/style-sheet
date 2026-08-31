@@ -322,8 +322,8 @@ main {
   pointer-events: auto;
 }
 .resource-modal {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: transparent;
+  border: 1px solid rgba(128,128,128,0.2);
   border-radius: 16px;
   width: 100%;
   max-width: 760px;
@@ -331,7 +331,7 @@ main {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.25);
   transform: scale(0.96) translateY(8px);
   transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
   opacity: 0;
@@ -340,31 +340,41 @@ main {
   transform: scale(1) translateY(0);
   opacity: 1;
 }
-.resource-modal-header {
+.resource-modal-hero {
+  position: relative;
+  background: radial-gradient(ellipse at top, #d6d9f6 0%, #eef0fb 60%, #ffffff 100%);
+  border-radius: 16px 16px 0 0;
+  min-height: 180px;
+  padding: 40px 24px 32px;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 16px 16px 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.resource-modal-header {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 .resource-modal-title {
   font-family: var(--font-sans);
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #000;
   letter-spacing: -0.01em;
 }
 .resource-modal-updated {
   font-family: 'Netflix Sans Regular','Inter',sans-serif;
   font-size: 12px;
-  color: var(--text-muted);
+  color: rgba(0,0,0,0.6);
 }
 .resource-modal-close {
   width: 32px;
   height: 32px;
   border-radius: 8px;
   border: none;
-  background: rgba(128,128,128,0.12);
-  color: var(--text-secondary);
+  background: rgba(0,0,0,0.08);
+  color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,9 +382,11 @@ main {
   flex-shrink: 0;
   transition: background 0.15s ease;
 }
-.resource-modal-close:hover { background: rgba(128,128,128,0.22); }
+.resource-modal-close:hover { background: rgba(0,0,0,0.16); }
 .resource-modal-body {
-  padding: 12px 24px 24px;
+  background: var(--card-bg);
+  border-radius: 0 0 16px 16px;
+  padding: 20px 24px 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -390,6 +402,10 @@ main {
   line-height: 22px;
   color: var(--text-secondary);
   margin: 0;
+}
+.resource-modal-hero .template-card-tag {
+  background: rgba(255,255,255,0.14);
+  color: #fff;
 }
 .resource-modal-cta-section {
   display: flex;
@@ -484,6 +500,13 @@ main {
   width: 100%;
 }
 .resource-modal-cta:hover { background: #5B79F1; }
+.resource-modal-cta[aria-disabled="true"],
+.resource-modal-link-card[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(0.4);
+}
+.resource-modal-cta[aria-disabled="true"]:hover { background: #4061E7; }
 .resource-modal-support-section {
   display: flex;
   gap: 10px;
@@ -1615,6 +1638,20 @@ body.light-mode .type-copy-btn:hover { background: rgba(0,0,0,0.18); color: #000
 
 .guide-use-case:last-child { border-bottom: none; }
 
+.guide-use-case-linked {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.guide-use-case-linked:hover { background: rgba(255,255,255,0.03); }
+
+.guide-use-case-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  align-self: center;
+}
+
 .guide-use-case-icon {
   width: 36px;
   height: 36px;
@@ -2086,6 +2123,7 @@ body.light-mode .template-card:hover {
 .template-card-tag[data-tag="checklist"]     { color: #16A34A; background: rgba(22, 163, 74, 0.12); }
 .template-card-tag[data-tag="tutorial"]      { color: #E11D48; background: rgba(225, 29, 72, 0.12); }
 .template-card-tag[data-tag="reference"]     { color: #64748B; background: rgba(100, 116, 139, 0.12); }
+.template-card-tag[data-tag="template"]      { color: #C026D3; background: rgba(192, 38, 211, 0.12); }
 
 .template-card-link {
   width: 28px;
@@ -2408,14 +2446,14 @@ body.light-mode .guide-beta-body { color: #233371; }
             </div>
           </div>
 
-          <div class="template-card" data-modal="localization-workflow" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="template-card" data-modal="image-generator" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="template-card-thumb template-card-thumb--inactive">
-              <img src="assets/thumb-localization.svg" alt="Localization Workflow preview"/>
+              <img src="assets/thumb-image-generator.svg" alt="Image Generator preview"/>
             </div>
             <div class="template-card-info">
-              <div class="template-card-title">Localization Workflow</div>
-              <div class="template-card-date">In progress</div>
-              <div class="template-card-status" data-status="in-progress">Status: In Progress</div>
+              <div class="template-card-title">Image Generator</div>
+              <div class="template-card-date">Coming soon</div>
+              <div class="template-card-status" data-status="coming-soon">Status: Coming Soon</div>
             </div>
             <div class="template-card-footer">
               <div class="template-card-tags">
@@ -2430,14 +2468,14 @@ body.light-mode .guide-beta-body { color: #233371; }
             </div>
           </div>
 
-          <div class="template-card" data-modal="image-generator" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="template-card" data-modal="localization-workflow" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="template-card-thumb template-card-thumb--inactive">
-              <img src="assets/thumb-image-generator.svg" alt="Image Generator preview"/>
+              <img src="assets/thumb-localization.svg" alt="Localization Workflow preview"/>
             </div>
             <div class="template-card-info">
-              <div class="template-card-title">Image Generator</div>
-              <div class="template-card-date">Coming soon</div>
-              <div class="template-card-status" data-status="coming-soon">Status: Coming Soon</div>
+              <div class="template-card-title">Localization Workflow</div>
+              <div class="template-card-date">In progress</div>
+              <div class="template-card-status" data-status="in-progress">Status: In Progress</div>
             </div>
             <div class="template-card-footer">
               <div class="template-card-tags">
@@ -2472,25 +2510,27 @@ body.light-mode .guide-beta-body { color: #233371; }
         <div class="guide-eyebrow">Use cases</div>
         <h2 class="guide-heading">A few ways to use it</h2>
         <div class="guide-use-cases">
+          <div class="guide-use-case guide-use-case-linked" data-resource-modal="slides-from-doc" role="button" tabindex="0">
+            <div class="guide-use-case-icon"><img src="assets/icon-usecase-deck.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-content">
+              <div class="guide-use-case-title">Building a slide deck</div>
+              <div class="guide-use-case-body">Turn a Google Doc into a Netflix-branded slide deck with the Slide Deck Builder skill. Less back-and-forth, faster results.</div>
+            </div>
+            <svg class="guide-use-case-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6.5M13 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="guide-use-case guide-use-case-linked" data-resource-modal="mailings" role="button" tabindex="0">
+            <div class="guide-use-case-icon"><img src="assets/icon-usecase-mail.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-content">
+              <div class="guide-use-case-title">Creating mailings and newsletters</div>
+              <div class="guide-use-case-body">Turn a Google Doc into a ready-to-send CS email with the Emails skill. Paste the doc link, pick a color scheme, and it builds the email for you.</div>
+            </div>
+            <svg class="guide-use-case-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6.5M13 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
           <div class="guide-use-case">
             <div class="guide-use-case-icon"><img src="assets/icon-usecase-images.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
             <div class="guide-use-case-content">
               <div class="guide-use-case-title">Generating on-brand images</div>
               <div class="guide-use-case-body">Pick your colors, export the .md file, and attach it to your image prompt. The AI uses the right palette automatically.</div>
-            </div>
-          </div>
-          <div class="guide-use-case">
-            <div class="guide-use-case-icon"><img src="assets/icon-usecase-deck.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
-            <div class="guide-use-case-content">
-              <div class="guide-use-case-title">Building a slide deck</div>
-              <div class="guide-use-case-body">Pin your styles and paste them into any AI prompt. It applies the right colors and fonts from the start. Less back-and-forth, faster results.</div>
-            </div>
-          </div>
-          <div class="guide-use-case">
-            <div class="guide-use-case-icon"><img src="assets/icon-usecase-reports.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
-            <div class="guide-use-case-content">
-              <div class="guide-use-case-title">Creating reports and dashboards</div>
-              <div class="guide-use-case-body">Copy any value and paste it into your prompt instead of describing styles manually. Your output stays consistent every time.</div>
             </div>
           </div>
         </div>
@@ -2731,12 +2771,12 @@ body.light-mode .guide-beta-body { color: #233371; }
 <!-- ── RESOURCE MODAL ──────────────────────────────────────────────────────── -->
 <div class="resource-overlay" id="resource-overlay">
   <div class="resource-modal" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title">
-    <div class="resource-modal-header">
-      <button class="resource-modal-close" id="resource-modal-close" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-    <div class="resource-modal-body">
+    <div class="resource-modal-hero">
+      <div class="resource-modal-header">
+        <button class="resource-modal-close" id="resource-modal-close" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
 
       <!-- 1. Title -->
       <div class="resource-modal-title" id="resource-modal-title">Slide Deck Builder</div>
@@ -2747,6 +2787,9 @@ body.light-mode .guide-beta-body { color: #233371; }
         <span class="template-card-tag" data-tag="cowork-skill">Cowork Skill</span>
         <span class="template-card-tag" data-tag="how-to">How to</span>
       </div>
+
+    </div>
+    <div class="resource-modal-body">
 
       <!-- 3. Description -->
       <p class="resource-modal-desc">Turn a Google Doc into a Netflix-branded slide deck in minutes. Connect your doc, pick a template, and the skill builds the slides for you. No manual copying or formatting needed.</p>
@@ -3928,17 +3971,15 @@ const resourceOverlay = document.getElementById('resource-overlay');
 const RESOURCE_DATA = {
   'slides-from-doc': {
     title: 'Slide Deck Builder',
-    updated: 'Updated Jul 17, 2026',
+    updated: 'Updated Aug 28, 2026',
     tags: [{ tag: 'cowork-skill', label: 'Cowork Skill' }, { tag: 'how-to', label: 'How to' }],
     desc: 'Turn a Google Doc into a Netflix-branded slide deck in minutes. Connect your doc, pick a template, and the skill builds the slides for you. No manual copying or formatting needed.',
     ctaHref: 'https://claude.ai/customize/skills?selectedId=skill_01UcMQ29e88J5W73A2SsfaYr',
     learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22',
-    learnLabel: 'Slide Deck Builder',
     learnThumb: 'assets/thumb-slides-from-doc.svg',
     demoVideo: 'assets/slide-deck-demo.mp4',
     outputExamples: [
-      { label: 'HTML Slide Deck', href: 'https://apps.prod.netflixstudios.com/studio/slides/presentation/b99b14f7-7204-4605-b39d-467e58be85b4' },
-      { label: 'HTML Slide Deck Branded Mode', href: 'https://posit-connect.prod.netflix.net/content/5390b8e4-1a26-4031-80f9-34effdd88c43/' },
+      { label: 'HTML Slide Deck', href: 'https://posit-connect.prod.netflix.net/content/5390b8e4-1a26-4031-80f9-34effdd88c43/' },
       { label: 'Google Slides Deck', href: 'https://docs.google.com/presentation/d/1HBe92wR7mny6rA-ab0Gjd1O_l90qkbyTkEVfbOCRKWs/edit?usp=sharing' },
     ],
   },
@@ -3949,13 +3990,11 @@ const RESOURCE_DATA = {
     desc: 'Turns a Google Doc into a ready-to-send CS email. Paste the doc link, pick a color scheme, and the skill auto-detects the type and builds the email for you.',
     ctaHref: 'https://claude.ai/customize/skills?selectedId=skill_013brPZpoEJVmG5vX6iy1rsf',
     learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/edf754a9-7b5d-407e-89be-df8c5749b444',
-    learnLabel: 'Emails',
     learnThumb: 'assets/thumb-mailings.svg',
     demoVideo: 'assets/email-demo.mp4',
     outputExamples: [
-      { label: 'Example 1', href: '#' },
-      { label: 'Example 2', href: '#' },
-      { label: 'Example 3', href: '#' },
+      { label: 'Email Project Updates', href: 'https://posit-connect.prod.netflix.net/content/250d9f68-3227-4957-89d6-5d4bb6ec98b9/' },
+      { label: 'Email Announcement', href: 'https://posit-connect.prod.netflix.net/content/6917b3cb-630b-4ee5-ae43-faeeb0afdd13/' },
     ],
   },
   'localization-workflow': {
@@ -3965,9 +4004,9 @@ const RESOURCE_DATA = {
     desc: 'Placeholder description. More details about the Localization Workflow resource coming soon.',
     ctaHref: '#',
     learnHref: '#',
-    learnLabel: 'Localization Workflow',
     learnThumb: 'assets/thumb-localization.svg',
     demoVideo: null,
+    released: false,
   },
   'image-generator': {
     title: 'Image Generator',
@@ -3976,8 +4015,8 @@ const RESOURCE_DATA = {
     desc: 'Placeholder description. More details about the Image Generator resource coming soon.',
     ctaHref: '#',
     learnHref: '#',
-    learnLabel: 'Image Generator',
     learnThumb: 'assets/thumb-image-generator.svg',
+    released: false,
     demoVideo: null,
   },
 };
@@ -3991,11 +4030,17 @@ function openResourceModal(key) {
   m.querySelector('.resource-modal-tags').innerHTML = data.tags.map(t =>
     `<span class="template-card-tag" data-tag="${t.tag}">${t.label}</span>`).join('');
   m.querySelector('.resource-modal-desc').textContent = data.desc;
-  m.querySelector('.resource-modal-cta').href = data.ctaHref;
+  const released = data.released !== false;
+  const cta = m.querySelector('.resource-modal-cta');
+  cta.href = data.ctaHref;
+  cta.setAttribute('aria-disabled', String(!released));
+  cta.tabIndex = released ? 0 : -1;
   const linkCard = m.querySelector('.resource-modal-link-card');
   linkCard.href = data.learnHref;
+  linkCard.setAttribute('aria-disabled', String(!released));
+  linkCard.tabIndex = released ? 0 : -1;
   linkCard.querySelector('.resource-modal-link-card-thumb img').src = data.learnThumb;
-  linkCard.querySelector('.resource-modal-link-card-label').textContent = data.learnLabel;
+  linkCard.querySelector('.resource-modal-link-card-label').textContent = `How-to Guide: ${data.title}`;
   const video = m.querySelector('.resource-modal-video');
   const placeholder = document.getElementById('resource-modal-video-placeholder');
   if (data.demoVideo) {
@@ -4034,6 +4079,11 @@ function closeResourceModal() {
 document.querySelectorAll('.template-card[data-modal]').forEach(card => {
   card.addEventListener('click', () => openResourceModal(card.dataset.modal));
   card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openResourceModal(card.dataset.modal); } });
+});
+
+document.querySelectorAll('[data-resource-modal]').forEach(el => {
+  el.addEventListener('click', () => openResourceModal(el.dataset.resourceModal));
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openResourceModal(el.dataset.resourceModal); } });
 });
 
 document.getElementById('resource-modal-close').addEventListener('click', closeResourceModal);
