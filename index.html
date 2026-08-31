@@ -356,6 +356,29 @@ main {
   top: 16px;
   right: 16px;
 }
+.resource-modal-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.resource-modal-hero-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.resource-modal-hero-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.resource-modal-hero-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .resource-modal-title {
   font-family: var(--font-sans);
   font-size: 26px;
@@ -1671,6 +1694,17 @@ body.light-mode .type-copy-btn:hover { background: rgba(0,0,0,0.18); color: #000
   color: #4061E7;
 }
 
+.guide-use-case-icon--art {
+  width: 80px;
+  height: 80px;
+  background: none;
+}
+
+.guide-use-case-icon--art img {
+  width: 80px;
+  height: 80px;
+}
+
 .guide-use-case:hover .guide-use-case-icon {
   transform: scale(1.05);
 }
@@ -2511,7 +2545,7 @@ body.light-mode .guide-beta-body { color: #233371; }
         <h2 class="guide-heading">A few ways to use it</h2>
         <div class="guide-use-cases">
           <div class="guide-use-case guide-use-case-linked" data-resource-modal="slides-from-doc" role="button" tabindex="0">
-            <div class="guide-use-case-icon"><img src="assets/icon-usecase-deck.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-icon guide-use-case-icon--art"><img src="assets/icon-usecase-deck.png" width="80" height="80" alt="" aria-hidden="true"/></div>
             <div class="guide-use-case-content">
               <div class="guide-use-case-title">Building a slide deck</div>
               <div class="guide-use-case-body">Turn a Google Doc into a Netflix-branded slide deck with the Slide Deck Builder skill. Less back-and-forth, faster results.</div>
@@ -2519,7 +2553,7 @@ body.light-mode .guide-beta-body { color: #233371; }
             <svg class="guide-use-case-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6.5M13 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="guide-use-case guide-use-case-linked" data-resource-modal="mailings" role="button" tabindex="0">
-            <div class="guide-use-case-icon"><img src="assets/icon-usecase-mail.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-icon guide-use-case-icon--art"><img src="assets/icon-usecase-mail.png" width="80" height="80" alt="" aria-hidden="true"/></div>
             <div class="guide-use-case-content">
               <div class="guide-use-case-title">Creating mailings and newsletters</div>
               <div class="guide-use-case-body">Turn a Google Doc into a ready-to-send CS email with the Emails skill. Paste the doc link, pick a color scheme, and it builds the email for you.</div>
@@ -2527,7 +2561,7 @@ body.light-mode .guide-beta-body { color: #233371; }
             <svg class="guide-use-case-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6.5M13 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="guide-use-case">
-            <div class="guide-use-case-icon"><img src="assets/icon-usecase-images.svg" width="18" height="18" alt="" aria-hidden="true"/></div>
+            <div class="guide-use-case-icon guide-use-case-icon--art"><img src="assets/icon-usecase-images.png" width="80" height="80" alt="" aria-hidden="true"/></div>
             <div class="guide-use-case-content">
               <div class="guide-use-case-title">Generating on-brand images</div>
               <div class="guide-use-case-body">Pick your colors, export the .md file, and attach it to your image prompt. The AI uses the right palette automatically.</div>
@@ -2778,14 +2812,19 @@ body.light-mode .guide-beta-body { color: #233371; }
         </button>
       </div>
 
-      <!-- 1. Title -->
-      <div class="resource-modal-title" id="resource-modal-title">Slide Deck Builder</div>
+      <div class="resource-modal-hero-content">
+        <div class="resource-modal-hero-top">
+          <div class="resource-modal-hero-icon"><img src="assets/icon-usecase-deck.png" alt="" aria-hidden="true"/></div>
+          <!-- 1. Title -->
+          <div class="resource-modal-title" id="resource-modal-title">Slide Deck Builder</div>
+        </div>
 
-      <!-- 2. Last updated + tags -->
-      <div class="resource-modal-updated">Updated Jul 17, 2026</div>
-      <div class="resource-modal-tags">
-        <span class="template-card-tag" data-tag="cowork-skill">Cowork Skill</span>
-        <span class="template-card-tag" data-tag="how-to">How to</span>
+        <!-- 2. Last updated + tags -->
+        <div class="resource-modal-updated">Updated Jul 17, 2026</div>
+        <div class="resource-modal-tags">
+          <span class="template-card-tag" data-tag="cowork-skill">Cowork Skill</span>
+          <span class="template-card-tag" data-tag="how-to">How to</span>
+        </div>
       </div>
 
     </div>
@@ -3977,6 +4016,7 @@ const RESOURCE_DATA = {
     ctaHref: 'https://claude.ai/customize/skills?selectedId=skill_01UcMQ29e88J5W73A2SsfaYr',
     learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22',
     learnThumb: 'assets/thumb-slides-from-doc.svg',
+    heroIcon: 'assets/icon-usecase-deck.png',
     demoVideo: 'assets/slide-deck-demo.mp4',
     outputExamples: [
       { label: 'HTML Slide Deck', href: 'https://posit-connect.prod.netflix.net/content/5390b8e4-1a26-4031-80f9-34effdd88c43/' },
@@ -3991,6 +4031,7 @@ const RESOURCE_DATA = {
     ctaHref: 'https://claude.ai/customize/skills?selectedId=skill_013brPZpoEJVmG5vX6iy1rsf',
     learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/edf754a9-7b5d-407e-89be-df8c5749b444',
     learnThumb: 'assets/thumb-mailings.svg',
+    heroIcon: 'assets/icon-usecase-mail.png',
     demoVideo: 'assets/email-demo.mp4',
     outputExamples: [
       { label: 'Email Project Updates', href: 'https://posit-connect.prod.netflix.net/content/250d9f68-3227-4957-89d6-5d4bb6ec98b9/' },
@@ -4005,6 +4046,7 @@ const RESOURCE_DATA = {
     ctaHref: '#',
     learnHref: '#',
     learnThumb: 'assets/thumb-localization.svg',
+    heroIcon: 'assets/icon-usecase-localization-disabled.png',
     demoVideo: null,
     released: false,
   },
@@ -4016,6 +4058,7 @@ const RESOURCE_DATA = {
     ctaHref: '#',
     learnHref: '#',
     learnThumb: 'assets/thumb-image-generator.svg',
+    heroIcon: 'assets/icon-usecase-images-disabled.png',
     released: false,
     demoVideo: null,
   },
@@ -4025,12 +4068,13 @@ function openResourceModal(key) {
   const data = RESOURCE_DATA[key];
   if (!data) return;
   const m = resourceOverlay.querySelector('.resource-modal');
+  const released = data.released !== false;
+  m.querySelector('.resource-modal-hero-icon img').src = data.heroIcon || data.learnThumb;
   m.querySelector('.resource-modal-title').textContent = data.title;
   m.querySelector('.resource-modal-updated').textContent = data.updated;
   m.querySelector('.resource-modal-tags').innerHTML = data.tags.map(t =>
     `<span class="template-card-tag" data-tag="${t.tag}">${t.label}</span>`).join('');
   m.querySelector('.resource-modal-desc').textContent = data.desc;
-  const released = data.released !== false;
   const cta = m.querySelector('.resource-modal-cta');
   cta.href = data.ctaHref;
   cta.setAttribute('aria-disabled', String(!released));
