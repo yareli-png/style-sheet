@@ -1,6 +1,6 @@
 <svg width="280" height="158" viewBox="0 0 280 158" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g clip-path="url(#clip0_422_156)">
-<path d="M280 0H0V158H280V0Z" fill="url(#paint0_linear_422_156)"/>
+<path d="M280 0H0V158H280V0Z" fill="url(#paint0_radial_422_156)"/>
 <path d="M150 51V107" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
 <path d="M125.8 65L174.2 93" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
 <path d="M174.2 65L125.8 93" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
@@ -11,10 +11,10 @@
 <pattern id="pattern0_422_156" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_422_156" transform="scale(0.005)"/>
 </pattern>
-<linearGradient id="paint0_linear_422_156" x1="0" y1="0" x2="280" y2="158" gradientUnits="userSpaceOnUse">
-<stop stop-color="#4061E7"/>
-<stop offset="1" stop-color="#BDA1FD"/>
-</linearGradient>
+<radialGradient id="paint0_radial_422_156" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(144 112) rotate(-13.2178) scale(144.323 76.0103)">
+<stop stop-color="#C7D2FC"/>
+<stop offset="1" stop-color="white"/>
+</radialGradient>
 <clipPath id="clip0_422_156">
 <rect width="280" height="158" fill="white"/>
 </clipPath>
