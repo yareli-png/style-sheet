@@ -5194,6 +5194,21 @@ document.querySelectorAll('.faq-q').forEach(trigger => {
   let results = [];
   let active = -1;
 
+  // Google Analytics: log what people search for and what they pick
+  let trackTimer = null;
+  let lastTracked = '';
+  function cleanTerm(q) {
+    const t = q.trim().toLowerCase().slice(0, 60);
+    return t.length >= 2 && !t.includes('@') ? t : '';
+  }
+  function trackSearch() {
+    clearTimeout(trackTimer);
+    const term = cleanTerm(input.value);
+    if (!term || term === lastTracked || typeof gtag !== 'function') return;
+    lastTracked = term;
+    gtag('event', 'search', { search_term: term, results_count: results.length });
+  }
+
   function el(tag, cls, text) {
     const n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -5253,13 +5268,22 @@ document.querySelectorAll('.faq-q').forEach(trigger => {
   function choose(i) {
     const r = results[i];
     if (!r) return;
+    trackSearch();
+    const term = cleanTerm(input.value);
+    if (term && typeof gtag === 'function') {
+      gtag('event', 'select_content', { search_term: term, content_type: r.e.type, item_id: r.e.title });
+    }
     close();
     input.value = '';
     input.blur();
     r.e.go();
   }
 
-  input.addEventListener('input', render);
+  input.addEventListener('input', () => {
+    render();
+    clearTimeout(trackTimer);
+    trackTimer = setTimeout(trackSearch, 900);
+  });
   input.addEventListener('focus', () => { if (input.value.trim()) render(); });
   input.addEventListener('blur', () => setTimeout(close, 120));
   input.addEventListener('keydown', e => {
