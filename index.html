@@ -46,6 +46,7 @@ body {
   background-color: var(--bg);
   color: var(--text-primary);
   min-height: 100vh;
+  overflow-x: clip;
   transition: background-color 400ms ease, color 400ms ease;
   padding-bottom: 96px;
 }
@@ -92,7 +93,7 @@ nav {
 }
 
 .nav-logo {
-  width: 35px;
+  width: auto;
   height: 35px;
   flex-shrink: 0;
   display: flex;
@@ -113,6 +114,7 @@ nav {
   height: 100%;
   object-fit: contain;
 }
+.nav-logo img { width: auto; height: 28px; }
 
 .nav-logo-placeholder {
   width: 24px;
@@ -570,6 +572,60 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+.resource-modal-palette-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.resource-modal-palette-card {
+  border-radius: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+.resource-modal-palette-art {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resource-modal-palette-art img {
+  max-height: 92px;
+  max-width: 70%;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,0.3));
+}
+.resource-modal-palette-card[data-palette="core"] .resource-modal-palette-art { background: radial-gradient(circle at 50% 55%, rgba(229,9,20,0.30), rgba(211,49,122,0.08) 55%, transparent 75%); }
+.resource-modal-palette-card[data-palette="cool"] .resource-modal-palette-art { background: radial-gradient(circle at 50% 55%, rgba(52,81,197,0.38), rgba(92,50,191,0.10) 55%, transparent 75%); }
+.resource-modal-palette-card[data-palette="warm"] .resource-modal-palette-art { background: radial-gradient(circle at 50% 55%, rgba(239,119,68,0.32), rgba(194,38,143,0.08) 55%, transparent 75%); }
+.resource-modal-palette-info {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--card-border);
+}
+.resource-modal-palette-name {
+  font-family: 'Netflix Sans Medium','Inter',sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.resource-modal-palette-mood {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.resource-modal-palette-swatches {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+.resource-modal-palette-swatches span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(128,128,128,0.35);
+}
+@media (max-width: 640px) {
+  .resource-modal-palette-cards { grid-template-columns: 1fr; }
 }
 .resource-modal-example-link {
   display: flex;
@@ -2041,6 +2097,24 @@ body.light-mode .guide-step:hover {
   color: var(--text-primary);
 }
 
+.guide-step-note {
+  margin-top: 8px;
+  font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-muted);
+}
+.guide-inline-link {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: #4061E7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.guide-inline-link:hover { opacity: 0.75; }
 .guide-step-body {
   font-family: 'Netflix Sans Regular', 'Inter', sans-serif;
   font-size: 16px;
@@ -2097,6 +2171,173 @@ body.light-mode .guide-step:hover {
   flex-direction: column;
   gap: 10px;
   padding: 8px 0 4px;
+}
+
+.guide-hero--banner {
+  position: relative;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+  gap: 16px;
+  width: 100vw;
+  margin: -40px 0 0 calc(50% - 50vw);
+  padding: 96px 32px;
+  background: linear-gradient(180deg, #A9B7F7 0%, #BCC3F8 28%, #D6D2FA 54%, #EEEBFC 80%, #F8F9FE 100%);
+}
+/* Home: page column spans the centered main so the banner centers on the nav */
+#tab-getting-started .guide-page { max-width: none; }
+.guide-hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.guide-hero-bg::before,
+.guide-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: -15%;
+  pointer-events: none;
+  filter: blur(70px);
+  will-change: transform;
+}
+.guide-hero-bg::before {
+  background:
+    radial-gradient(ellipse 34% 26% at 30% 52%, #4061E7 0%, rgba(64, 97, 231, 0) 100%),
+    radial-gradient(ellipse 30% 24% at 72% 46%, #6D3BE3 0%, rgba(109, 59, 227, 0) 100%),
+    radial-gradient(ellipse 26% 20% at 14% 76%, #D3C2FB 0%, rgba(211, 194, 251, 0) 100%);
+  animation: hero-drift-a 14s ease-in-out infinite alternate;
+}
+.guide-hero-bg::after {
+  background:
+    radial-gradient(ellipse 30% 22% at 56% 68%, rgba(176, 56, 220, 0.55) 0%, rgba(176, 56, 220, 0) 100%),
+    radial-gradient(ellipse 28% 22% at 84% 74%, rgba(199, 210, 252, 0.9) 0%, rgba(199, 210, 252, 0) 100%),
+    radial-gradient(ellipse 28% 20% at 40% 36%, rgba(64, 97, 231, 0.7) 0%, rgba(64, 97, 231, 0) 100%);
+  animation: hero-drift-b 18s ease-in-out infinite alternate;
+}
+@keyframes hero-drift-a {
+  from { transform: translate3d(-9%, 4%, 0) scale(1); }
+  to   { transform: translate3d(9%, -6%, 0) scale(1.15); }
+}
+@keyframes hero-drift-b {
+  from { transform: translate3d(9%, -4%, 0) scale(1.12); }
+  to   { transform: translate3d(-9%, 6%, 0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guide-hero-bg::before,
+  .guide-hero-bg::after { animation: none; }
+}
+.guide-hero--banner .guide-hero-title { color: #0D1121; }
+.guide-hero--banner .guide-hero-sub { color: #233371; }
+.hero-title-br { display: none; }
+.guide-hero--banner > * { position: relative; z-index: 1; }
+.guide-hero--banner > .guide-hero-bg { position: absolute; z-index: 0; }
+.guide-hero--banner > .hero-search { z-index: 5; }
+
+/* Hero search */
+.hero-search {
+  width: min(520px, 100%);
+  margin-top: 18px;
+  text-align: left;
+}
+.hero-search-field { position: relative; }
+.hero-search-field svg {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #233371;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-search-input {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px 0 48px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #0D1121;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  outline: none;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.hero-search-input::placeholder { color: #233371; opacity: 0.7; }
+.hero-search-input:focus {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(64, 97, 231, 0.25);
+}
+.hero-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 6px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #DCDCDC;
+  box-shadow: 0 18px 40px rgba(13, 17, 33, 0.22);
+  z-index: 20;
+}
+.hero-search-results[hidden] { display: none; }
+.hero-search-group {
+  padding: 10px 12px 4px;
+  font-family: 'Netflix Sans Medium', 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #767676;
+}
+.hero-search-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.hero-search-item.active { background: #E8ECFD; }
+.hero-search-swatch {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.hero-search-body { min-width: 0; }
+.hero-search-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0D1121;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hero-search-sub {
+  margin-top: 1px;
+  font-size: 12px;
+  color: #555555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hero-search-empty { padding: 16px 14px; font-size: 14px; color: #555555; }
+.guide-hero--banner .guide-hero-title { font-size: 56px; }
+.guide-hero--banner .guide-hero-sub { max-width: 600px; font-size: 17px; line-height: 26px; }
+@media (max-width: 640px) {
+  .guide-hero--banner { margin-top: -24px; padding: 64px 20px; gap: 14px; }
+  .guide-hero--banner .guide-hero-title { font-size: 46px; line-height: 1.08; }
+  .guide-hero--banner .guide-hero-sub { font-size: 17px; line-height: 25px; }
+  .hero-title-br { display: inline; }
 }
 
 .guide-placeholder-img {
@@ -2329,6 +2570,7 @@ body.light-mode .template-card:hover {
 }
 
 .template-card-tag[data-tag="cowork-skill"]  { color: #4061E7; background: rgba(64, 97, 231, 0.12); }
+.template-card-tag[data-tag="cowork-artifact"] { color: #4061E7; background: rgba(64, 97, 231, 0.12); }
 .template-card-tag[data-tag="figma-file"]    { color: #9747FF; background: rgba(151, 71, 255, 0.12); }
 .template-card-tag[data-tag="how-to"]        { color: #0D9488; background: rgba(13, 148, 136, 0.12); }
 .template-card-tag[data-tag="prompt"]        { color: #D97706; background: rgba(217, 119, 6, 0.12); }
@@ -2338,6 +2580,7 @@ body.light-mode .template-card:hover {
 .template-card-tag[data-tag="reference"]     { color: #64748B; background: rgba(100, 116, 139, 0.12); }
 .template-card-tag[data-tag="template"]      { color: #C026D3; background: rgba(192, 38, 211, 0.12); }
 .template-card-tag[data-tag="optimization"]  { color: #0891B2; background: rgba(8, 145, 178, 0.12); }
+.template-card-tag[data-tag="claude-code"]    { color: #EA580C; background: rgba(234, 88, 12, 0.12); }
 
 .template-card-link {
   width: 28px;
@@ -2548,11 +2791,11 @@ body.light-mode .guide-beta-body { color: #233371; }
 
 <nav>
   <div class="nav-inner" data-review-section="Navigation">
-    <button class="nav-logo" data-tab="colors" aria-label="Go to Colors">
-      <img src="assets/km-logo.svg" alt="Logo" />
+    <button class="nav-logo" aria-label="Home" title="Home">
+      <img src="assets/netflix-symbol.png" alt="Netflix" />
     </button>
     <div class="nav-tabs">
-      <button class="nav-tab" data-tab="getting-started">Getting Started</button>
+      <button class="nav-tab" data-tab="getting-started">Home</button>
       <button class="nav-tab" data-tab="templates">Skill Library</button>
       <button class="nav-tab" data-tab="create">GenAI Visuals</button>
       <div class="nav-dropdown" id="customize-nav-dropdown">
@@ -2615,11 +2858,7 @@ body.light-mode .guide-beta-body { color: #233371; }
         <div class="guide-eyebrow">Watch it</div>
         <h2 class="guide-heading">See it in action</h2>
         <div class="resource-modal-embed-frame resource-modal-embed-frame--video">
-          <video class="resource-modal-video" controls playsinline preload="metadata" style="display:none"></video>
-          <div class="resource-modal-embed-placeholder">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M13 11l9 5-9 5V11z" fill="currentColor" opacity="0.5"/></svg>
-            Video coming soon
-          </div>
+          <video class="resource-modal-video" id="customize-guide-video" src="assets/style-sheet-demo.mp4" controls playsinline preload="metadata"></video>
         </div>
       </div>
 
@@ -2675,7 +2914,6 @@ body.light-mode .guide-beta-body { color: #233371; }
 
       <div class="guide-section">
         <div class="guide-hero">
-          <span class="guide-hero-label">Style Sheet</span>
           <h1 class="guide-hero-title">Skill Library</h1>
           <p class="guide-hero-sub">AI-optimized resources for high-frequency use cases.</p>
         </div>
@@ -2707,10 +2945,10 @@ body.light-mode .guide-beta-body { color: #233371; }
 
           <div class="template-card" data-modal="mailings" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="template-card-thumb">
-              <img src="assets/thumb-mailings.svg" alt="Emails preview"/>
+              <img src="assets/thumb-mailings.svg" alt="Email Builder preview"/>
             </div>
             <div class="template-card-info">
-              <div class="template-card-title">Emails</div>
+              <div class="template-card-title">Email Builder</div>
               <div class="template-card-date">Updated Aug 21, 2026</div>
               <div class="template-card-status" data-status="released">Status: Released</div>
             </div>
@@ -2728,18 +2966,18 @@ body.light-mode .guide-beta-body { color: #233371; }
           </div>
 
           <div class="template-card" data-modal="localization-workflow" role="button" tabindex="0" aria-haspopup="dialog">
-            <div class="template-card-thumb template-card-thumb--inactive">
-              <img src="assets/thumb-localization.svg" alt="Localization Workflow preview"/>
+            <div class="template-card-thumb">
+              <img src="assets/thumb-localization.svg" alt="Figma Localization preview"/>
             </div>
             <div class="template-card-info">
-              <div class="template-card-title">Localization Workflow</div>
-              <div class="template-card-date">In progress</div>
-              <div class="template-card-status" data-status="in-progress">Status: In Progress</div>
+              <div class="template-card-title">Figma Localization</div>
+              <div class="template-card-date">Updated Sep 29, 2026</div>
+              <div class="template-card-status" data-status="released">Status: Released</div>
             </div>
             <div class="template-card-footer">
               <div class="template-card-tags">
-                <span class="template-card-tag" data-tag="template">Template</span>
-                <span class="template-card-tag" data-tag="guide">Guide</span>
+                <span class="template-card-tag" data-tag="claude-code">Claude Code</span>
+                <span class="template-card-tag" data-tag="how-to">How to</span>
               </div>
               <div class="template-card-link">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2751,10 +2989,10 @@ body.light-mode .guide-beta-body { color: #233371; }
 
           <div class="template-card" data-modal="image-renaming-metadata" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="template-card-thumb">
-              <img src="assets/thumb-metadata.svg" alt="Asset Naming and Tag preview"/>
+              <img src="assets/thumb-metadata.svg" alt="Asset Tagger preview"/>
             </div>
             <div class="template-card-info">
-              <div class="template-card-title">Asset Naming and Tag</div>
+              <div class="template-card-title">Asset Tagger</div>
               <div class="template-card-date">Updated Sep 29, 2026</div>
               <div class="template-card-status" data-status="released">Status: Released</div>
             </div>
@@ -2762,6 +3000,28 @@ body.light-mode .guide-beta-body { color: #233371; }
               <div class="template-card-tags">
                 <span class="template-card-tag" data-tag="cowork-skill">Cowork Skill</span>
                 <span class="template-card-tag" data-tag="optimization">Optimization</span>
+              </div>
+              <div class="template-card-link">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 2H3a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V7M10 2h2m0 0v2m0-2L6 8" stroke="#4061E7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-card" data-modal="visuals-finder" role="button" tabindex="0" aria-haspopup="dialog">
+            <div class="template-card-thumb">
+              <img src="assets/thumb-image.svg" alt="Visuals Finder preview"/>
+            </div>
+            <div class="template-card-info">
+              <div class="template-card-title">Visuals Finder</div>
+              <div class="template-card-date">Updated Oct 8, 2026</div>
+              <div class="template-card-status" data-status="released">Status: Released</div>
+            </div>
+            <div class="template-card-footer">
+              <div class="template-card-tags">
+                <span class="template-card-tag" data-tag="cowork-artifact">Cowork Artifact</span>
+                <span class="template-card-tag" data-tag="how-to">How to</span>
               </div>
               <div class="template-card-link">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2781,7 +3041,6 @@ body.light-mode .guide-beta-body { color: #233371; }
 
       <div class="guide-section">
         <div class="guide-hero">
-          <span class="guide-hero-label">Style Sheet</span>
           <h1 class="guide-hero-title">GenAI Visuals</h1>
           <p class="guide-hero-sub">Generate on-brand images for internal use, without starting from scratch. The more people use it, the bigger our shared library grows, ready to search, reuse, and learn from.</p>
         </div>
@@ -2796,7 +3055,8 @@ body.light-mode .guide-beta-body { color: #233371; }
           <div class="guide-workflow-num">1</div>
           <div class="guide-workflow-content">
           <div class="guide-step-title">Search existing assets first</div>
-          <div class="guide-step-body">Check the <strong>Visual Design Library</strong> artifact to see if the visual you need already exists. Reuse it if it fits, or use it as a starting point for something new.</div>
+          <div class="guide-step-body">Check the <a href="claude://cowork/shared-artifact?uuid=01a03bda-2a8e-7417-a1ef-f51e7febc56d" style="color:#4061E7;font-weight:600;text-decoration:underline"><strong>Visuals Finder</strong></a> artifact to see if the visual you need already exists. Reuse it if it fits, or use it as a starting point for something new.</div>
+          <div class="guide-step-note">How the Visuals Finder <button type="button" class="guide-inline-link" data-modal-open="visuals-finder">works</button></div>
           </div>
         </div>
 
@@ -2807,13 +3067,13 @@ body.light-mode .guide-beta-body { color: #233371; }
           <div class="guide-step-body">Choose the generator below that matches what you're making. These workflows are still in beta, so if you hit any rough edges, let us know so we can keep improving them.</div>
           <div class="template-grid">
             <div class="template-card" data-modal="image-generator" role="button" tabindex="0" aria-haspopup="dialog">
-              <div class="template-card-thumb template-card-thumb--inactive">
-                <img src="assets/thumb-image-generator.svg" alt="Pictogram Maker preview"/>
+              <div class="template-card-thumb">
+                <img src="assets/thumb_pictograms.svg" alt="Pictogram Maker preview"/>
               </div>
               <div class="template-card-info">
                 <div class="template-card-title">Pictogram Maker</div>
-                <div class="template-card-date">Coming soon</div>
-                <div class="template-card-status" data-status="coming-soon">Status: Coming Soon</div>
+                <div class="template-card-date">Updated Oct 8, 2026</div>
+                <div class="template-card-status" data-status="released">Status: Released</div>
               </div>
               <div class="template-card-footer">
                 <div class="template-card-tags">
@@ -2880,7 +3140,7 @@ body.light-mode .guide-beta-body { color: #233371; }
           <div class="guide-workflow-content">
           <div class="guide-step-title">Submit for QA</div>
           <div class="guide-step-body">Upload your finished images for review. You don't need to wait for approval before using them internally, but submitting helps us grow the library and spot new use cases.</div>
-          <a class="resource-modal-cta guide-workflow-cta" href="https://drive.google.com/drive/folders/17ieuJDXDf4qUQbXkXrMA7GO1EMRIFiVo?usp=sharing" target="_blank" rel="noopener">
+          <a class="resource-modal-cta guide-workflow-cta" href="https://drive.google.com/drive/folders/12WNn_rX0qMY_pJhAxd3UqeMtI0J347eV" target="_blank" rel="noopener">
             Open the shared Drive folder
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5.5M10 2V6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -2902,14 +3162,21 @@ body.light-mode .guide-beta-body { color: #233371; }
     </div>
   </div>
 
-  <div class="tab-content" id="tab-getting-started" data-review-section="Getting Started">
+  <div class="tab-content" id="tab-getting-started" data-review-section="Home">
     <div class="guide-page">
 
       <div class="guide-section">
-        <div class="guide-hero">
-          <span class="guide-hero-label">Style Sheet</span>
-          <h1 class="guide-hero-title">Getting Started</h1>
-          <p class="guide-hero-sub">This is a Netflix's design style reference, readable by both humans and AI tools. No design background needed: pick what you need, copy it, and use it directly in your prompts.</p>
+        <div class="guide-hero guide-hero--banner">
+          <div class="guide-hero-bg" aria-hidden="true"></div>
+          <h1 class="guide-hero-title">GenAI Visual<br class="hero-title-br"> Design Hub</h1>
+          <p class="guide-hero-sub">One hub for every on-brand AI visual: skills to run, images to generate, and Netflix colors and type to grab. Everything you need, one click away.</p>
+          <div class="hero-search">
+            <div class="hero-search-field">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.7"/><path d="M12.5 12.5L16 16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <input class="hero-search-input" id="hero-search-input" type="text" role="combobox" aria-expanded="false" aria-controls="hero-search-results" aria-label="Search the hub" placeholder="Search skills, colors, FAQ..." autocomplete="off" spellcheck="false">
+              <div class="hero-search-results" id="hero-search-results" role="listbox" hidden></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2920,16 +3187,16 @@ body.light-mode .guide-beta-body { color: #233371; }
           <div class="guide-use-case guide-use-case-linked" data-tab-target="templates" role="button" tabindex="0">
             <div class="guide-use-case-icon guide-use-case-icon--art"><img src="assets/icon-usecase-skills.png" width="60" height="60" alt="" aria-hidden="true"/></div>
             <div class="guide-use-case-content">
-              <div class="guide-use-case-title">Find a resource</div>
-              <div class="guide-use-case-body">Browse the skill library: Slide Deck Builder, Emails, and other ready-to-run Cowork skills.</div>
+              <div class="guide-use-case-title">Find a skill</div>
+              <div class="guide-use-case-body">Browse the skill library: Slide Deck Builder, Email Builder, and other ready-to-run Cowork skills.</div>
             </div>
             <svg class="guide-use-case-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6.5M13 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="guide-use-case guide-use-case-linked" data-tab-target="create" role="button" tabindex="0">
             <div class="guide-use-case-icon guide-use-case-icon--art"><img src="assets/icon-usecase-image.png" width="60" height="60" alt="" aria-hidden="true"/></div>
             <div class="guide-use-case-content">
-              <div class="guide-use-case-title">Generate an image</div>
-              <div class="guide-use-case-body">Icons, pictograms, scene and instructional illustrations, plus when to loop in a designer instead.</div>
+              <div class="guide-use-case-title">Find or create an image</div>
+              <div class="guide-use-case-body">Find or generate icons, pictograms, and illustrations, plus when to loop in a designer.</div>
             </div>
             <svg class="guide-use-case-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6.5M13 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
@@ -2966,6 +3233,7 @@ body.light-mode .guide-beta-body { color: #233371; }
           </div>
         </div>
       </div>
+
 
     </div>
   </div>
@@ -3180,7 +3448,7 @@ body.light-mode .guide-beta-body { color: #233371; }
       <!-- 4. Run the skill CTA (centered, full-width) -->
       <div class="resource-modal-cta-section" id="resource-modal-cta-section">
         <a class="resource-modal-cta" href="https://apps.prod.netflixstudios.com/studio/slides/embed/a4a7901e-d63d-44fd-aa80-746a6d9f5c22?present=1" target="_blank" rel="noopener">
-          Run the skill
+          <span class="resource-modal-cta-label">Run the skill</span>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5.5M10 2V6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -3221,6 +3489,7 @@ body.light-mode .guide-beta-body { color: #233371; }
       <!-- 6. Output Examples -->
       <div class="resource-modal-embed-block" id="resource-modal-examples">
         <div class="resource-modal-embed-label">Output Examples</div>
+        <div class="resource-modal-palette-cards" id="resource-modal-palette-cards" style="display:none"></div>
         <div class="resource-modal-example-list" id="resource-modal-example-list"></div>
       </div>
 
@@ -4231,7 +4500,7 @@ const TAB_META = {
   gradients:        { title: 'Gradients',        subtitle: 'Ready-to-use color blends for backgrounds and visual moments.' },
   typography:       { title: 'Typography',       subtitle: 'All Netflix text styles, from big headlines to small labels.' },
   'customize-guide':{ title: 'How to Use It',    subtitle: 'How to use this style sheet, no design background required.' },
-  'getting-started':{ title: 'Getting Started',  subtitle: 'How to use this style sheet, no design background required.' },
+  'getting-started':{ title: 'Home',  subtitle: 'How to use this style sheet, no design background required.' },
   faq:              { title: 'FAQ',              subtitle: 'Quick answers to common questions.' },
   templates:        { title: 'Skill Library',    subtitle: 'The skill library: ready-to-run Cowork skills for high-frequency use cases.' },
   create:           { title: 'GenAI Visuals',      subtitle: 'Generate on-brand images for internal use, without starting from scratch.' },
@@ -4251,7 +4520,7 @@ function applyTabMeta(tab) {
   const meta = TAB_META[tab] || { title: tab, subtitle: '' };
   document.getElementById('section-title').textContent = meta.title;
   document.getElementById('section-subtitle').textContent = meta.subtitle;
-  document.title = `${meta.title} — Style Sheet`;
+  document.title = tab === 'getting-started' ? 'GenAI Visual Design Hub' : `${meta.title} — Style Sheet`;
   const isInfo = INFO_TABS.has(tab);
   const isCustomize = CUSTOMIZE_TABS.has(tab);
   document.querySelector('.controls').classList.toggle('hidden', isInfo);
@@ -4276,6 +4545,7 @@ function switchToTab(tab) {
   if (activeBtn) activeBtn.classList.add('active');
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   currentTab = tab;
+  if (tab !== 'customize-guide') { const gv = document.getElementById('customize-guide-video'); if (gv) gv.pause(); }
   $(`tab-${currentTab}`).classList.add('active');
   applyTabMeta(currentTab);
   renderCurrentTab();
@@ -4283,6 +4553,11 @@ function switchToTab(tab) {
 
 document.querySelectorAll('.nav-tab[data-tab]').forEach(btn => {
   btn.addEventListener('click', () => switchToTab(btn.dataset.tab));
+});
+
+const guideVideo = document.getElementById('customize-guide-video');
+guideVideo.addEventListener('loadedmetadata', () => {
+  guideVideo.parentElement.style.aspectRatio = `${guideVideo.videoWidth} / ${guideVideo.videoHeight}`;
 });
 
 document.querySelector('.nav-logo').addEventListener('click', () => switchToTab('getting-started'));
@@ -4418,7 +4693,7 @@ const RESOURCE_DATA = {
     ],
   },
   'mailings': {
-    title: 'Emails',
+    title: 'Email Builder',
     updated: 'Updated Aug 21, 2026',
     tags: [{ tag: 'cowork-skill', label: 'Cowork Skill' }, { tag: 'how-to', label: 'How to' }],
     desc: 'Turns a Google Doc into a ready-to-send CS email. Paste the doc link, pick a color scheme, and the skill auto-detects the type and builds the email for you.',
@@ -4433,22 +4708,23 @@ const RESOURCE_DATA = {
     ],
   },
   'localization-workflow': {
-    title: 'Localization Workflow',
-    updated: 'In progress',
-    tags: [{ tag: 'template', label: 'Template' }, { tag: 'guide', label: 'Guide' }],
-    desc: 'Placeholder description. More details about the Localization Workflow resource coming soon.',
-    ctaHref: '#',
-    learnHref: '#',
+    title: 'Figma Localization',
+    updated: 'Updated Sep 29, 2026',
+    tags: [{ tag: 'claude-code', label: 'Claude Code' }, { tag: 'how-to', label: 'How to' }],
+    desc: 'Expand your global reach with /figma-loc. Share a Figma link and it manages the end-to-end localization workflow, delivering publish-ready visual assets in every language you need.',
+    ctaLabel: 'Download the command',
+    ctaHref: 'https://drive.google.com/file/d/1DzKDDPl0Hj-MIfyVLKYvEiQOheiyb_bU/view',
+    learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/62b53f76-42cc-4f26-ad96-3a044d205947?present=1',
     learnThumb: 'assets/thumb-localization.svg',
-    heroIcon: 'assets/icon-usecase-localization-disabled.png',
-    demoVideo: null,
-    released: false,
+    heroIcon: 'assets/icon-usecase-localization.png',
+    demoVideo: 'assets/figma-loc.mp4',
+    released: true,
   },
   'image-renaming-metadata': {
-    title: 'Asset Naming and Tag',
+    title: 'Asset Tagger',
     updated: 'Updated Sep 29, 2026',
     tags: [{ tag: 'cowork-skill', label: 'Cowork Skill' }, { tag: 'optimization', label: 'Optimization' }],
-    desc: 'Placeholder description. More details about the Asset Naming and Tag resource coming soon.',
+    desc: 'Placeholder description. More details about the Asset Tagger resource coming soon.',
     ctaHref: '#',
     learnHref: '#',
     learnThumb: 'assets/thumb-metadata.svg',
@@ -4456,23 +4732,41 @@ const RESOURCE_DATA = {
     demoVideo: null,
     released: true,
   },
+  'visuals-finder': {
+    title: 'Visuals Finder',
+    updated: 'Updated Oct 8, 2026',
+    tags: [{ tag: 'cowork-artifact', label: 'Cowork Artifact' }, { tag: 'how-to', label: 'How to' }],
+    desc: 'Search for visuals, from icons to logos, with instant previews and one-click download. Request anything missing from the design team, or upload your own AI-made version for review.',
+    ctaLabel: 'Import Artifact',
+    ctaHref: 'claude://cowork/shared-artifact?uuid=01a121cc-b1de-7325-ab65-ceaec8a72889',
+    learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/0a14b0c3-0b6b-45d2-814a-47114da44b3f?present=1',
+    learnThumb: 'assets/thumb-image.svg',
+    heroIcon: 'assets/thumb-image.svg',
+    demoVideo: 'assets/visuals-finder.mp4',
+    released: true,
+  },
   'image-generator': {
     title: 'Pictogram Maker',
-    updated: 'Coming soon',
+    updated: 'Updated Oct 8, 2026',
     tags: [{ tag: 'template', label: 'Template' }, { tag: 'guide', label: 'Guide' }],
-    desc: 'Placeholder description. More details about the Pictogram Maker resource coming soon.',
+    desc: 'Small images that break complex concepts into simple, easy-to-digest visuals. Use them alongside text-heavy sections or inside content buckets.',
     ctaHref: 'https://gemini.google.com/gem/1UHU9uWecEmnYqYEeqero8V8HAHLzAeTd?usp=sharing',
-    learnHref: '#',
-    learnThumb: 'assets/thumb-image-generator.svg',
-    heroIcon: 'assets/icon-usecase-images-disabled.png',
-    released: false,
+    learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/fc659a07-706e-4a06-a88a-e97c9988dbef?present=1',
+    learnThumb: 'assets/thumb_pictograms.svg',
+    heroIcon: 'assets/icon-usecase-images.png',
+    released: true,
     demoVideo: 'assets/pictogram-maker.mp4',
+    paletteCards: [
+      { key: 'core', name: 'Core', mood: 'Bold and energetic', img: 'assets/pictogram-core.png', alt: 'Piggy bank pictogram in the Core palette', colors: ['#EB3942', '#F276AE', '#F89DC6', '#BDA1FD'] },
+      { key: 'cool', name: 'Cool', mood: 'Calm and professional', img: 'assets/pictogram-cool.png', alt: 'Party hat pictogram in the Cool palette', colors: ['#3451C5', '#889FF9', '#A9B9FA', '#BDA1FD'] },
+      { key: 'warm', name: 'Warm', mood: 'Friendly and inviting', img: 'assets/pictogram-warm.png', alt: 'Drink pictogram in the Warm palette', colors: ['#D42A79', '#F0793D', '#E8983C', '#E3B15C'] },
+    ],
   },
   'scene-illustrations': {
     title: 'Scene Illustrations',
     updated: 'Coming soon',
     tags: [{ tag: 'template', label: 'Template' }, { tag: 'guide', label: 'Guide' }],
-    desc: 'Placeholder description. More details about the Scene Illustrations resource coming soon.',
+    desc: 'Images that visually support content or represent abstract concepts, such as an illustration of an email, making the content more engaging.',
     ctaHref: '#',
     learnHref: '#',
     learnThumb: 'assets/thumb-image-generator.svg',
@@ -4484,7 +4778,7 @@ const RESOURCE_DATA = {
     title: 'Instructional Illustrations',
     updated: 'Coming soon',
     tags: [{ tag: 'template', label: 'Template' }, { tag: 'guide', label: 'Guide' }],
-    desc: 'Placeholder description. More details about the Instructional Illustrations resource coming soon.',
+    desc: 'Images designed to guide through tasks or problem-solving steps. Use them in learning modules, troubleshooting flows and support content.',
     ctaHref: '#',
     learnHref: '#',
     learnThumb: 'assets/thumb-image-generator.svg',
@@ -4528,6 +4822,7 @@ function openResourceModal(key) {
     descEl.textContent = data.desc;
     const cta = m.querySelector('.resource-modal-cta');
     cta.href = data.ctaHref;
+    cta.querySelector('.resource-modal-cta-label').textContent = data.ctaLabel || 'Run the skill';
     cta.setAttribute('aria-disabled', String(!released));
     cta.tabIndex = released ? 0 : -1;
     const linkCard = m.querySelector('.resource-modal-link-card');
@@ -4564,7 +4859,26 @@ function openResourceModal(key) {
   }
   const examplesBlock = document.getElementById('resource-modal-examples');
   const examplesList = document.getElementById('resource-modal-example-list');
-  if (data.outputExamples && data.outputExamples.length) {
+  const paletteEl = document.getElementById('resource-modal-palette-cards');
+  if (data.paletteCards && data.paletteCards.length) {
+    paletteEl.innerHTML = data.paletteCards.map(c => `
+      <div class="resource-modal-palette-card" data-palette="${c.key}">
+        <div class="resource-modal-palette-art"><img src="${c.img}" alt="${c.alt}"></div>
+        <div class="resource-modal-palette-info">
+          <div class="resource-modal-palette-name">${c.name}</div>
+          <div class="resource-modal-palette-mood">${c.mood}</div>
+          <div class="resource-modal-palette-swatches">${c.colors.map(h => `<span style="background:${h}" title="${h}"></span>`).join('')}</div>
+        </div>
+      </div>`).join('');
+    paletteEl.style.display = '';
+  } else {
+    paletteEl.innerHTML = '';
+    paletteEl.style.display = 'none';
+  }
+  if (data.paletteCards && data.paletteCards.length && !(data.outputExamples && data.outputExamples.length)) {
+    examplesList.innerHTML = '';
+    examplesBlock.style.display = '';
+  } else if (data.outputExamples && data.outputExamples.length) {
     examplesList.innerHTML = data.outputExamples.map(ex => `
       <a class="resource-modal-example-link" href="${ex.href}" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 1.5h4l3 3v7a1 1 0 01-1 1H4a1 1 0 01-1-1v-9a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 1.5V4.5H11" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
@@ -4584,6 +4898,11 @@ function closeResourceModal() {
   const video = resourceOverlay.querySelector('.resource-modal-video');
   if (video) { video.pause(); }
 }
+
+
+document.querySelectorAll('[data-modal-open]').forEach(btn => {
+  btn.addEventListener('click', () => openResourceModal(btn.dataset.modalOpen));
+});
 
 document.querySelectorAll('.template-card[data-modal]').forEach(card => {
   card.addEventListener('click', () => openResourceModal(card.dataset.modal));
@@ -4632,6 +4951,330 @@ document.querySelectorAll('.faq-q').forEach(trigger => {
   trigger.addEventListener('click', toggle);
   trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
 });
+
+// ── HERO SEARCH ───────────────────────────────────────────────────────────────
+(function () {
+  const input = document.getElementById('hero-search-input');
+  const panel = document.getElementById('hero-search-results');
+  if (!input || !panel) return;
+
+  const SYNONYMS = [
+    ['deck', 'slide', 'slides', 'presentation', 'presentations', 'ppt', 'powerpoint', 'keynote'],
+    ['email', 'emails', 'mail', 'mailing', 'mailings', 'newsletter', 'announcement'],
+    ['image', 'images', 'picture', 'pictures', 'photo', 'visual', 'visuals', 'illustration', 'illustrations', 'artwork', 'graphic', 'asset', 'assets'],
+    ['icon', 'icons', 'pictogram', 'pictograms', 'symbol'],
+    ['localization', 'localisation', 'localize', 'localise', 'translate', 'translation', 'translations', 'language', 'languages', 'loc', 'l10n', 'i18n'],
+    ['tag', 'tags', 'tagging', 'tagger', 'metadata', 'rename', 'renaming', 'naming'],
+    ['find', 'search', 'browse', 'discover', 'lookup', 'library', 'finder'],
+    ['color', 'colors', 'colour', 'colours', 'palette', 'palettes', 'hex', 'swatch', 'swatches'],
+    ['gradient', 'gradients', 'blend', 'blends', 'fade'],
+    ['font', 'fonts', 'typography', 'typeface', 'headline', 'heading', 'text'],
+    ['skill', 'skills', 'command', 'commands', 'automation', 'template', 'templates'],
+    ['help', 'support', 'faq', 'question', 'questions', 'contact', 'feedback'],
+    ['red', 'core'],
+    ['blue', 'cool', 'indigo'],
+    ['orange', 'warm'],
+    ['purple', 'violet'],
+    ['video', 'demo', 'tutorial', 'guide', 'howto'],
+  ];
+  const SYN = {};
+  SYNONYMS.forEach((g, i) => g.forEach(w => { (SYN[w] = SYN[w] || []).push(i); }));
+
+  // Extra search words per resource, beyond its own title and description
+  const RESOURCE_KEYWORDS = {
+    'slides-from-doc': 'slide deck presentation google slides doc document',
+    'mailings': 'email newsletter mail announcement project update',
+    'localization-workflow': 'figma loc translate translation languages linguists jira alt text slash command claude code',
+    'image-renaming-metadata': 'asset tag rename naming metadata optimization',
+    'visuals-finder': 'find search image icon logo download request design team',
+    'image-generator': 'pictogram icon gemini generate image',
+    'scene-illustrations': 'editorial editorials article articles story stories magazine blog scene illustration',
+  };
+
+  const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const toks = s => { const n = norm(s); return n ? n.split(' ') : []; };
+  const stem = w => w.length > 3 ? w.replace(/(es|s)$/, '') : w;
+
+  // Edit distance where swapping two neighbouring letters counts as one edit
+  function lev(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    const d = [];
+    for (let i = 0; i <= a.length; i++) { d[i] = [i]; }
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) {
+      for (let j = 1; j <= b.length; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+          d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+        }
+      }
+    }
+    return d[a.length][b.length];
+  }
+
+  // How well one query word matches a list of words (0 = no match)
+  function wordScore(q, words) {
+    let best = 0;
+    const qs = stem(q);
+    const qSyn = SYN[q] || SYN[qs];
+    const maxEdit = q.length >= 8 ? 2 : q.length >= 4 ? 1 : 0;
+    for (const w of words) {
+      let s = 0;
+      if (w === q) s = 1;
+      else if (stem(w) === qs) s = 0.95;
+      else if (q.length >= 2 && w.startsWith(q)) s = 0.8;
+      else if (qSyn && (SYN[w] || SYN[stem(w)] || []).some(g => qSyn.includes(g))) s = 0.7;
+      else if (maxEdit && lev(qs, stem(w), maxEdit) <= maxEdit) s = 0.6;
+      if (s > best) best = s;
+      if (best === 1) break;
+    }
+    return best;
+  }
+
+  let index = null;
+  const TYPE_ORDER = ['Skill', 'Workflow', 'Guide', 'FAQ', 'Color', 'Gradient', 'Type'];
+
+  function add(list, e) {
+    e.titleWords = toks(e.title);
+    e.keyWords = toks(e.keywords || '');
+    e.textWords = toks(e.text || '');
+    list.push(e);
+  }
+
+  function goTab(tab) { switchToTab(tab); }
+  function goScheme(scheme, tab) {
+    const btn = document.querySelector(`.scheme-btn[data-scheme="${scheme}"]`);
+    if (btn) btn.click();
+    switchToTab(tab);
+  }
+
+  function buildIndex() {
+    const list = [];
+
+    // Skills and workflows (each has a modal)
+    Object.keys(RESOURCE_DATA).forEach(key => {
+      const d = RESOURCE_DATA[key];
+      const card = document.querySelector(`.template-card[data-modal="${key}"]`);
+      const tab = card && card.closest('.tab-content') ? card.closest('.tab-content').id.replace('tab-', '') : 'templates';
+      add(list, {
+        type: tab === 'create' ? 'Workflow' : 'Skill',
+        title: d.title,
+        sub: d.desc && !/^Placeholder/.test(d.desc) ? d.desc : (d.tags || []).map(t => t.label).join(' · '),
+        keywords: (RESOURCE_KEYWORDS[key] || '') + ' ' + (d.tags || []).map(t => t.label).join(' '),
+        text: /^Placeholder/.test(d.desc || '') ? '' : d.desc,
+        go: () => { goTab(tab); openResourceModal(key); },
+      });
+    });
+
+    // Guide steps and headings on the info tabs
+    ['templates', 'create', 'customize-guide'].forEach(tab => {
+      document.querySelectorAll(`#tab-${tab} .guide-step-title, #tab-${tab} .guide-heading`).forEach(el => {
+        const body = el.nextElementSibling;
+        const text = body ? body.textContent.trim().replace(/\s+/g, ' ') : '';
+        add(list, {
+          type: 'Guide',
+          title: el.textContent.trim().replace(/\s+/g, ' '),
+          sub: text.slice(0, 120),
+          text,
+          go: () => {
+            goTab(tab);
+            el.style.scrollMarginTop = '84px';
+            setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+          },
+        });
+      });
+    });
+
+    // FAQ
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      if (!q || !a) return;
+      const answer = a.textContent.trim().replace(/\s+/g, ' ');
+      add(list, {
+        type: 'FAQ',
+        title: q.textContent.trim().replace(/\s+/g, ' '),
+        sub: answer.slice(0, 120),
+        text: answer,
+        go: () => {
+          goTab('faq');
+          item.classList.add('open');
+          q.setAttribute('aria-expanded', 'true');
+          item.style.scrollMarginTop = '84px';
+          setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+        },
+      });
+    });
+
+    // Colors (deduped across light and dark modes)
+    const seen = new Set();
+    Object.keys(COLOR_DATA).forEach(scheme => {
+      Object.keys(COLOR_DATA[scheme]).forEach(mode => {
+        Object.keys(COLOR_DATA[scheme][mode]).forEach(cat => {
+          (COLOR_DATA[scheme][mode][cat].swatches || []).forEach(sw => {
+            const k = `${scheme}|${sw.name}|${sw.hex}`;
+            if (seen.has(k)) return;
+            seen.add(k);
+            add(list, {
+              type: 'Color',
+              title: sw.name,
+              sub: `${scheme} · ${sw.hex.toUpperCase()}${sw.role ? ' · ' + sw.role : ''}`,
+              swatch: sw.hex,
+              keywords: `color ${scheme} ${sw.hex} ${sw.role || ''} ${cat}`,
+              go: () => goScheme(scheme, 'colors'),
+            });
+          });
+        });
+      });
+    });
+
+    // Gradients
+    Object.keys(GRADIENT_DATA).forEach(scheme => {
+      Object.keys(GRADIENT_DATA[scheme]).forEach(group => {
+        (GRADIENT_DATA[scheme][group].items || []).forEach(g => {
+          add(list, {
+            type: 'Gradient',
+            title: g.name,
+            sub: `${scheme} · ${group}${g.role ? ' · ' + g.role : ''}`,
+            gradient: [g.from, g.to],
+            keywords: `gradient ${scheme} ${group} ${g.role || ''} ${g.from} ${g.to}`,
+            go: () => goScheme(scheme, 'gradients'),
+          });
+        });
+      });
+    });
+
+    // Typography
+    TYPOGRAPHY_DATA.forEach(group => {
+      group.styles.forEach(st => {
+        add(list, {
+          type: 'Type',
+          title: st.token,
+          sub: `${group.group} · ${st.fontName} · ${st.size}px`,
+          keywords: `typography font text style ${group.group} ${st.fontName} ${st.sample || ''}`,
+          text: st.usage || '',
+          go: () => goTab('typography'),
+        });
+      });
+    });
+
+    return list;
+  }
+
+  function search(query) {
+    const qs = toks(query);
+    if (!qs.length) return [];
+    const out = [];
+    index.forEach(e => {
+      let total = 0;
+      for (const q of qs) {
+        const t = wordScore(q, e.titleWords) * 3;
+        const k = wordScore(q, e.keyWords) * 2;
+        const x = wordScore(q, e.textWords);
+        const best = Math.max(t, k, x);
+        if (!best) return;
+        total += best;
+      }
+      out.push({ e, score: total / qs.length });
+    });
+    out.sort((a, b) => b.score - a.score);
+    const perType = {};
+    const picked = out.filter(r => {
+      perType[r.e.type] = (perType[r.e.type] || 0) + 1;
+      return perType[r.e.type] <= 4;
+    }).slice(0, 12);
+    // Group by type, keeping best-scoring group first
+    const groupBest = {};
+    picked.forEach(r => { groupBest[r.e.type] = Math.max(groupBest[r.e.type] || 0, r.score); });
+    return picked.sort((a, b) =>
+      (groupBest[b.e.type] - groupBest[a.e.type]) || (TYPE_ORDER.indexOf(a.e.type) - TYPE_ORDER.indexOf(b.e.type)) || (b.score - a.score));
+  }
+
+  let results = [];
+  let active = -1;
+
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function render() {
+    panel.innerHTML = '';
+    const q = input.value.trim();
+    if (!q) { close(); return; }
+    if (!index) index = buildIndex();
+    results = search(q);
+    active = results.length ? 0 : -1;
+    if (!results.length) {
+      panel.appendChild(el('div', 'hero-search-empty', 'No matches. Try a different word.'));
+    } else {
+      let lastType = null;
+      results.forEach((r, i) => {
+        if (r.e.type !== lastType) {
+          panel.appendChild(el('div', 'hero-search-group', r.e.type === 'Type' ? 'Typography' : r.e.type + (r.e.type === 'FAQ' ? '' : 's')));
+          lastType = r.e.type;
+        }
+        const row = el('div', 'hero-search-item' + (i === active ? ' active' : ''));
+        row.setAttribute('role', 'option');
+        row.dataset.i = i;
+        if (r.e.swatch) {
+          const sw = el('span', 'hero-search-swatch'); sw.style.background = r.e.swatch; row.appendChild(sw);
+        } else if (r.e.gradient) {
+          const sw = el('span', 'hero-search-swatch'); sw.style.background = `linear-gradient(135deg, ${r.e.gradient[0]}, ${r.e.gradient[1]})`; row.appendChild(sw);
+        }
+        const body = el('div', 'hero-search-body');
+        body.appendChild(el('div', 'hero-search-title', r.e.title));
+        if (r.e.sub) body.appendChild(el('div', 'hero-search-sub', r.e.sub));
+        row.appendChild(body);
+        row.addEventListener('mousedown', ev => { ev.preventDefault(); choose(i); });
+        row.addEventListener('mousemove', () => setActive(i));
+        panel.appendChild(row);
+      });
+    }
+    panel.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+
+  function setActive(i) {
+    active = i;
+    panel.querySelectorAll('.hero-search-item').forEach(n => n.classList.toggle('active', Number(n.dataset.i) === i));
+    const cur = panel.querySelector('.hero-search-item.active');
+    if (cur) cur.scrollIntoView({ block: 'nearest' });
+  }
+
+  function close() {
+    panel.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+  }
+
+  function choose(i) {
+    const r = results[i];
+    if (!r) return;
+    close();
+    input.value = '';
+    input.blur();
+    r.e.go();
+  }
+
+  input.addEventListener('input', render);
+  input.addEventListener('focus', () => { if (input.value.trim()) render(); });
+  input.addEventListener('blur', () => setTimeout(close, 120));
+  input.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' && results.length) { e.preventDefault(); setActive((active + 1) % results.length); }
+    else if (e.key === 'ArrowUp' && results.length) { e.preventDefault(); setActive((active - 1 + results.length) % results.length); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (active >= 0) choose(active); }
+    else if (e.key === 'Escape') { close(); input.blur(); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && currentTab === 'getting-started' && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) {
+      e.preventDefault();
+      input.focus();
+    }
+  });
+})();
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 
