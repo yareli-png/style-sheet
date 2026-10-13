@@ -4539,12 +4539,23 @@ function applyTabMeta(tab) {
   }
 }
 
-function switchToTab(tab) {
+// Each tab gets its own address, so links and the back button work
+const TAB_HASH = {
+  'getting-started': 'home', templates: 'skill-library', create: 'genai-visuals',
+  'customize-guide': 'how-to-use-it', colors: 'colors', gradients: 'gradients', typography: 'typography', faq: 'faq',
+};
+const HASH_TAB = Object.fromEntries(Object.entries(TAB_HASH).map(([t, h]) => [h, t]));
+const tabFromHash = () => HASH_TAB[location.hash.replace('#', '')] || 'getting-started';
+
+function switchToTab(tab, fromHistory) {
   document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
   const activeBtn = document.querySelector(`.nav-tab[data-tab="${navTabFor(tab)}"]`);
   if (activeBtn) activeBtn.classList.add('active');
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   currentTab = tab;
+  if (!fromHistory && TAB_HASH[tab] && tabFromHash() !== tab) {
+    history.pushState(null, '', tab === 'getting-started' ? location.pathname + location.search : '#' + TAB_HASH[tab]);
+  }
   if (tab !== 'customize-guide') { const gv = document.getElementById('customize-guide-video'); if (gv) gv.pause(); }
   $(`tab-${currentTab}`).classList.add('active');
   applyTabMeta(currentTab);
@@ -4697,7 +4708,7 @@ const RESOURCE_DATA = {
     updated: 'Updated Aug 21, 2026',
     tags: [{ tag: 'cowork-skill', label: 'Cowork Skill' }, { tag: 'how-to', label: 'How to' }],
     desc: 'Turns a Google Doc into a ready-to-send CS email. Paste the doc link, pick a color scheme, and the skill auto-detects the type and builds the email for you.',
-    ctaHref: 'https://claude.ai/customize/skills?selectedId=skill_013brPZpoEJVmG5vX6iy1rsf',
+    ctaHref: 'https://claude.ai/customize/skills/id/plugin_01GFeTh49rW4QZ4fWGbF5RjZ',
     learnHref: 'https://apps.prod.netflixstudios.com/studio/slides/embed/edf754a9-7b5d-407e-89be-df8c5749b444',
     learnThumb: 'assets/thumb-mailings.svg',
     heroIcon: 'assets/icon-usecase-mail.png',
@@ -5303,7 +5314,8 @@ document.querySelectorAll('.faq-q').forEach(trigger => {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 
 applySchemeColor();
-switchToTab('getting-started');
+switchToTab(tabFromHash(), true);
+window.addEventListener('popstate', () => switchToTab(tabFromHash(), true));
 window.addEventListener('resize', syncPinPanelOffset);
 
 // ── BANNER CURSOR GRADIENT ────────────────────────────────────────────────────
